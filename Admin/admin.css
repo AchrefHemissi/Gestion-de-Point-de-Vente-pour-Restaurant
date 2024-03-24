@@ -10,7 +10,8 @@
   position: fixed;
   height: 100%;
   width: 240px;
-  background: orange;
+  background-color:#d75b32;
+  background:linear-gradient(to top, #ce6745, #d75b32);;
   transition: all 0.5s ease;
 }
 .sidebar.active{
@@ -39,7 +40,7 @@
 .sidebar .nav-links li{
   position: relative;
   list-style: none;
-  height: 50px;
+  height: 100px;
 }
 .sidebar .nav-links li a{
   height: 100%;
@@ -50,10 +51,10 @@
   transition: all 0.4s ease;
 }
 .sidebar .nav-links li a.active{
-  background: darkgoldenrod
+  background: #d75b32
 }
 .sidebar .nav-links li a:hover{
-  background: darkgoldenrod
+  background: #d77e60
 }
 .sidebar .nav-links li i{
   min-width: 60px;
@@ -74,7 +75,7 @@
 }
 .home-section{
   position: relative;
-  background: #f5f5f5;
+  background: #ffdfd5;
   min-height: 100vh;
   width: calc(100% - 240px);
   left: 240px;
@@ -87,8 +88,8 @@
 .home-section nav{
   display: flex;
   justify-content: space-between;
-  height: 80px;
-  background: #fff;
+  height: 70px;
+  background: #fdd9ce;
   display: flex;
   align-items: center;
   position: fixed;
@@ -117,7 +118,7 @@ nav .sidebar-button i{
 .home-section nav .profile-details{
   display: flex;
   align-items: center;
-  background: #F5F6FA;
+  background: #ffdfd5;
   border: 2px solid #EFEEF1;
   border-radius: 6px;
   height: 50px;
@@ -137,6 +138,7 @@ nav .profile-details .admin_name{
   margin: 0 10px;
   white-space: nowrap;
 }
+
 nav .profile-details i{
   font-size: 25px;
   color: #333;
@@ -211,7 +213,7 @@ nav .profile-details i{
    background: #C0F2D8;
  }
 .home-content .box .cart.three{
-   color: #ffc233;
+   color: #d75b32;
    background: #ffe8b3;
  }
 .home-content .box .cart.four{
@@ -268,7 +270,7 @@ nav .profile-details i{
 }
 .sales-boxes .box .button a{
   color: #fff;
-  background:orange;
+  background:#d75b32;
   padding: 4px 12px;
   font-size: 15px;
   font-weight: 400;
@@ -277,7 +279,7 @@ nav .profile-details i{
   transition: all 0.3s ease;
 }
 .sales-boxes .box .button a:hover{
-  background:  darkgoldenrod;
+  background:  #f18c6b;
 }
 
 /* Right box */
@@ -410,9 +412,12 @@ nav .profile-details i{
 
 
 .customer {
-    border: 1px solid #ccc;
+    border: 1px solid #474646;
+    background-color: #fff;
     padding: 10px;
     margin-bottom: 10px;
+    margin-right:30px;
+    margin-left:30px;
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -434,3 +439,36 @@ nav .profile-details i{
     border-radius: 3px;
     cursor: pointer;
   }
+
+.chartcontainer{
+  display:flex;
+  margin-top: 20px;
+  justify-content:center;
+  height: 300px;
+}
+ .chart{
+  display: flex;
+  background-color: #333;
+  width: 700px;
+  height: 100%;
+  border-radius: 12px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+ }
+
+ .moving{
+  animation: transitionIn 0.75s;
+ }
+
+ @keyframes transitionIn{
+  from{
+  opacity :  0;
+  transform: rotateX(-10deg);
+}
+  to{
+  opacity : 1;
+  transform: rotateX(0);
+
+}
+
+
+ }
