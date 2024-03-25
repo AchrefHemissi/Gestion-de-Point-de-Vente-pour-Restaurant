@@ -1,3 +1,32 @@
+<?php
+  session_start();
+  $con = new mysqli_connect("intoed-arrows.000webhostap","id22003962_achref","sedzeedzff54684-I", "id22003962_myresto");
+  if ($_SERVER['REQUEST_METHOD']=="POST"){
+    $fname= mysqli_real_escape_string($con,$_POST['fname']);
+    $lname= mysqli_real_escape_string($con,$_POST['lname']);
+    $email= mysqli_real_escape_string($con,$_POST['email']);
+    $password= mysqli_real_escape_string($con,$_POST['password']);
+    $num = "select count(*) as total_rows from utilisateur";
+    $result=mysqli_query($conn,$num);
+    if (mysqli_num_rows($result) > 0) {
+      // Fetch the row as an associative array
+      $row = mysqli_fetch_assoc($result);
+      $newId = $row['total_rows'];
+    
+    if(!empty(trim($fname)) && !empty(trim($lname)) && !is_numeric($email)){
+      $query="insert into utilisateur(id,nom,prenom,email,pass,etat,is_admin) values($newId,$fname,$lname,$email,$password,0,0)";
+      mysqli_query($con,$query);
+      echo "<script>alert('Utilisateur ajouté avec succés')</script>";
+
+    }
+    else{
+      echo "<script>alert('Veuillez remplir tous les champs correctement')</script>";
+    }
+  }
+
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -19,13 +48,13 @@
     </div>
     <div class="container" id="container">
       <div class="form-container sign-up">
-        <form>
+        <form method="POST">
           <h1>Create Account</h1>
 
-          <input type="text" placeholder="First Name" />
-          <input type="text" placeholder="Last Name" />
-          <input type="email" placeholder="Email" />
-          <input type="password" placeholder="Password" />
+          <input type="text" placeholder="First Name" name="fname" />
+          <input type="text" placeholder="Last Name" name="lname" />
+          <input type="email" placeholder="Email" name="email"/>
+          <input type="password" placeholder="Password" name="password"/>
           <button>Sign Up</button>
         </form>
       </div>
