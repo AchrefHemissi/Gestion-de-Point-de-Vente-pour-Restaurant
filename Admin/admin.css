@@ -442,17 +442,35 @@ nav .profile-details i{
 
 .chartcontainer{
   display:flex;
-  margin-top: 20px;
+  height : 400px;
+  margin-top: 30px;
   justify-content:center;
-  height: 300px;
+  align-items: center;
+  
+}
+.center{
+  width:70%;
+  margin-left: auto;
+  margin-right: auto;
+
+
 }
  .chart{
+  padding : 2 rem;
   display: flex;
-  background-color: #333;
-  width: 700px;
-  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background: #3e3252;
+  background-color:#3e0468;
+  height : 100%;
+  width: 100%;
+  border: 1px solid #f49131;
   border-radius: 12px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0px 16px rgba(0, 0, 0, 0.8);
+ }
+ #myChart{
+  height: 100%;
+  width: 100%;
  }
 
  .moving{
