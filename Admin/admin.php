@@ -53,11 +53,7 @@
           <div class="recent-sales box moving">
             <div class="title">Recent Orders</div>
             <?php 
-            $servername="localhost";
-            $username="id22003962_achref";
-            $password="sedzeedzff54684-I";
-            $dbname="resto";
-            $conn = mysqli_connect($servername, $username, $password, $dbname);
+            $conn = mysqli_connect("localhost", "id22003962_achref", "sedzeedzff54684-I", "id22003962_myresto");
             if (!$conn) {
               die("Connection failed: " . mysqli_connect_error());
             }
@@ -75,11 +71,7 @@
             <div class="title">Top Selling Products</div>
             <ul class="top-sales-details">
             <?php 
-            $servername="localhost";
-            $username="id22003962_achref";
-            $password="sedzeedzff54684-I";
-            $dbname="resto";
-            $conn = mysqli_connect($servername, $username, $password, $dbname);
+            $conn = mysqli_connect("localhost", "id22003962_achref", "sedzeedzff54684-I", "id22003962_myresto");
             if (!$conn) {
               die("Connection failed: " . mysqli_connect_error());
             }
@@ -109,11 +101,7 @@
         <div class="customer">
           <div class="customer-info">
           <?php 
-            $servername="localhost";
-            $username="id22003962_achref";
-            $password="sedzeedzff54684-I";
-            $dbname="resto";
-            $conn = mysqli_connect($servername, $username, $password, $dbname);
+            $conn = mysqli_connect("localhost", "id22003962_achref", "sedzeedzff54684-I", "id22003962_myresto");
             if (!$conn) {
               die("Connection failed: " . mysqli_connect_error());
             }
