@@ -7,7 +7,7 @@
     $email= mysqli_real_escape_string($con,$_POST['email']);
     $password= mysqli_real_escape_string($con,$_POST['password']);
     $num = "select count(*) as total_rows from utilisateur";
-    $result=mysqli_query($conn,$num);
+    $result=mysqli_query($con,$num);
     if (mysqli_num_rows($result) > 0) {
       // Fetch the row as an associative array
       $row = mysqli_fetch_assoc($result);
