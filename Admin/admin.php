@@ -9,7 +9,6 @@
       rel="stylesheet"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
   </head>
   <body>
     <div class="sidebar">
@@ -27,7 +26,6 @@
             <span class="links_name">Customers</span>
           </a>
         </li>
-
         <li class="log_out" id="logOutButton">
           <a href="logout.html">
             <i class="bx bx-log-out"></i>
@@ -53,7 +51,7 @@
           <div class="recent-sales box moving">
             <div class="title">Recent Orders</div>
             <?php 
-            $conn = mysqli_connect("localhost", "id22003962_achref", "sedzeedzff54684-I", "id22003962_myresto");
+            $conn =  mysqli_connect("localhost", "root","", "resto");
             if (!$conn) {
               die("Connection failed: " . mysqli_connect_error());
             }
@@ -71,7 +69,7 @@
             <div class="title">Top Selling Products</div>
             <ul class="top-sales-details">
             <?php 
-            $conn = mysqli_connect("localhost", "id22003962_achref", "sedzeedzff54684-I", "id22003962_myresto");
+            $conn =  mysqli_connect("localhost", "root","", "resto");
             if (!$conn) {
               die("Connection failed: " . mysqli_connect_error());
             }
@@ -98,23 +96,27 @@
         id="customersList"
         style="display: none"
       >
-        <div class="customer">
-          <div class="customer-info">
           <?php 
-            $conn = mysqli_connect("localhost", "id22003962_achref", "sedzeedzff54684-I", "id22003962_myresto");
+            $conn =  mysqli_connect("localhost", "root","", "resto");
             if (!$conn) {
               die("Connection failed: " . mysqli_connect_error());
+            };
+              $sql = "SELECT * FROM utilisateur";
+              $result = mysqli_query($conn, $sql);
+            
+              while ($row = mysqli_fetch_assoc($result)) {
+                  echo '<div class="customer">';
+                    echo '<div class="customer-info">';
+                     echo '<span class="info-label">First Name:</span>';
+                     echo '<span class="info-value"> ' . $row['prenom'] . ' </span>';
+                     echo '<span class="info-label">Last Name:</span>';
+                     echo '<span class="info-value"> ' . $row['nom'] . ' </span>';
+                    echo '</div>';
+                    echo '<button class="ban-button" onclick="ban(this)">Ban</button>';
+                  echo '</div>';
             }
-            $sql = "SELECT * FROM utilisateur";
-            $result = mysqli_query($conn, $sql);
-            echo "<ul>";
-            while ($row = mysqli_fetch_assoc($result)) {
-                echo "<li>". "First name: ". $row['prenom'] ." --- Last name: ". $row['nom']. "</li>";
-            }
-            echo "</ul>";
             mysqli_close($conn);
             ?>
-        </div>
       </div>
     </section>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>

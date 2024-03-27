@@ -1,5 +1,8 @@
 /* Googlefont Poppins CDN Link */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+body{
+  height: 100vh;
+}
 *{
   margin: 0;
   padding: 0;
@@ -475,6 +478,10 @@ nav .profile-details i{
 
  .moving{
   animation: transitionIn 0.75s;
+ }
+ .customers-list{
+  display: flex;
+  flex-direction: column;
  }
 
  @keyframes transitionIn{
