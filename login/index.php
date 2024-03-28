@@ -1,90 +1,141 @@
 <?php
-  session_start();
-  $con = new mysqli_connect("intoed-arrows.000webhostap","id22003962_achref","sedzeedzff54684-I", "id22003962_myresto");
-  if ($_SERVER['REQUEST_METHOD']=="POST"){
-    $fname= mysqli_real_escape_string($con,$_POST['fname']);
-    $lname= mysqli_real_escape_string($con,$_POST['lname']);
-    $email= mysqli_real_escape_string($con,$_POST['email']);
-    $password= mysqli_real_escape_string($con,$_POST['password']);
-    $num = "select count(*) as total_rows from utilisateur";
-    $result=mysqli_query($con,$num);
+session_start();
+$serveur = 'localhost';
+$utilisateur = 'root';
+$motdepasse = '';
+$base_de_donnees = 'if0_36253541_glicious';
+$con = new mysqli($serveur, $utilisateur, $motdepasse, $base_de_donnees);
+
+if ($con->connect_error) {
+  die("Erreur de connexion à la base de données : " . $connexion->connect_error);
+}
+$login_message = '';
+$signup_message = '';
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+  if (isset($_POST['login'])) {
+    $email = mysqli_real_escape_string($con, $_POST['login_email']);
+    $password = mysqli_real_escape_string($con, $_POST['login_password']);
+
+    $query = "SELECT id, email, pass,etat,is_admin FROM utilisateur WHERE email='$email'";
+    $result = mysqli_query($con, $query);
+    $user = mysqli_fetch_assoc($result);
+
+
+    if ($user && password_verify($password, $user['pass'])) {
+      $_SESSION['user_id'] = $user['id'];
+      if ($user['is_admin'] == 1) {
+        header("Location: ../Admin/admin.php");
+        exit;
+      } else {
+        if ($user['etat'] == 1) {
+          header("Location: baned.php");
+        } else {
+        }
+      }
+    } else {
+
+      $login_message  = '<div class="message-error">Email ou mot de passe incorrect</div>';
+    }
+  }
+
+
+  if (isset($_POST['signup'])) {
+    $fname = mysqli_real_escape_string($con, $_POST['fname']);
+    $lname = mysqli_real_escape_string($con, $_POST['lname']);
+    $email = mysqli_real_escape_string($con, $_POST['email']);
+    $password = mysqli_real_escape_string($con, $_POST['password']);
+
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+    $query = "SELECT id FROM utilisateur WHERE email='$email'";
+    $result = mysqli_query($con, $query);
     if (mysqli_num_rows($result) > 0) {
-      // Fetch the row as an associative array
+
+      $signup_message = '<div class="message-error">Cet email est déjà utilisé</div>';
+    } else {
+
+      $query = "SELECT MAX(id) AS max_id FROM utilisateur";
+      $result = mysqli_query($con, $query);
       $row = mysqli_fetch_assoc($result);
-      $newId = $row['total_rows'];
-    
-    if(!empty(trim($fname)) && !empty(trim($lname)) && !is_numeric($email)){
-      $query="insert into utilisateur(id,nom,prenom,email,pass,etat,is_admin) values($newId,$fname,$lname,$email,$password,0,0)";
-      mysqli_query($con,$query);
-      echo "<script>alert('Utilisateur ajouté avec succés')</script>";
+      $newId = $row['max_id'] + 1;
 
-    }
-    else{
-      echo "<script>alert('Veuillez remplir tous les champs correctement')</script>";
+      if (!empty(trim($fname)) && !empty(trim($lname)) && !empty(trim($email)) && !empty(trim($password))) {
+        $query = "INSERT INTO utilisateur(id, nom, prenom, email, pass, etat, is_admin) VALUES ('$newId', '$fname', '$lname', '$email', '$hashedPassword', 0, 0)";
+        if (mysqli_query($con, $query)) {
+          $signup_message = '<div class="message-success">Utilisateur ajouté avec succès</div>';
+        } else {
+          $signup_message = '<div class="message-error">Erreur lors de l\'ajout de l\'utilisateur</div>';
+        }
+      } else {
+        $signup_message = '<div class="message-error">Veuillez remplir tous les champs correctement</div>';
+      }
     }
   }
-
-  }
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-    />
-    <link rel="stylesheet" href="style.css" />
-    <title>Gl-icious</title>
-  </head>
 
-  <body>
-    <div class="welcome">
-      <h1 id="welcome">
-        Welcome to <span style="color: brown">GL-icious</span>
-      </h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="logo.png" class="icone" />
+  <title>Gl-icious</title>
+</head>
+
+<body>
+  <div class="welcome">
+    <h1 id="welcome">
+      Welcome to <span style="color: brown">GL-icious</span>
+    </h1>
+  </div>
+  <div class="container" id="container">
+    <div class="form-container sign-up">
+      <form method="POST">
+        <h1>Create Account</h1>
+
+        <input type="text" placeholder="First Name" name="fname" />
+        <input type="text" placeholder="Last Name" name="lname" />
+        <input type="email" placeholder="Email" name="email" />
+        <input type="password" placeholder="Password" name="password" />
+        <button type="submit" name="signup">Sign Up</button>
+        <div class="message"><?php echo $signup_message; ?>
+        </div>
+      </form>
     </div>
-    <div class="container" id="container">
-      <div class="form-container sign-up">
-        <form method="POST">
-          <h1>Create Account</h1>
-
-          <input type="text" placeholder="First Name" name="fname" />
-          <input type="text" placeholder="Last Name" name="lname" />
-          <input type="email" placeholder="Email" name="email"/>
-          <input type="password" placeholder="Password" name="password"/>
-          <input type="text" placeholder="Adress" name="adress"/>
-          <button>Sign Up</button>
-        </form>
-      </div>
-      <div class="form-container sign-in">
-        <form>
-          <h1>Sign In</h1>
-          <input type="email" placeholder="Email" />
-          <input type="password" placeholder="Password" />
-          <button>Sign In</button>
-        </form>
-      </div>
-      <div class="toggle-container">
-        <div class="toggle">
-          <div class="toggle-panel toggle-left">
-            <h1>Welcome Back!</h1>
-            <p>Enter your personal details to use all of site features</p>
-            <button class="hidden" id="login">Sign In</button>
-          </div>
-          <div class="toggle-panel toggle-right">
-            <h1>Don't have an account?</h1>
-            <p>
-              Register with your personal details to use all of site features
-            </p>
-            <button class="hidden" id="register">Sign Up</button>
-          </div>
+    <div class="form-container sign-in">
+      <form method="POST">
+        <h1>Sign In</h1>
+        <input type="email" placeholder="Email" name="login_email" />
+        <input type="password" placeholder="Password" name="login_password" />
+        <button type="submit" name="login">Sign In</button>
+        <div class="message"><?php echo $login_message; ?>
+        </div>
+      </form>
+    </div>
+    <div class="toggle-container">
+      <div class="toggle">
+        <div class="toggle-panel toggle-left">
+          <h1>Welcome Back!</h1>
+          <p>Enter your personal details to use all of site features</p>
+          <button class="hidden" id="login">Sign In</button>
+        </div>
+        <div class="toggle-panel toggle-right">
+          <h1>Don't have an account?</h1>
+          <p>
+            Register with your personal details to use all of site features
+          </p>
+          <button class="hidden" id="register">Sign Up</button>
         </div>
       </div>
     </div>
+  </div>
 
-    <script src="script.js"></script>
-  </body>
+  <script src="script.js"></script>
+</body>
+
 </html>
