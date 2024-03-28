@@ -9,8 +9,7 @@ $con = new mysqli($serveur, $utilisateur, $motdepasse, $base_de_donnees);
 if ($con->connect_error) {
   die("Erreur de connexion à la base de données : " . $connexion->connect_error);
 }
-$login_message = '';
-$signup_message = '';
+$message = '';
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
   if (isset($_POST['login'])) {
@@ -35,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       }
     } else {
 
-      $login_message  = '<div class="message-error">Email ou mot de passe incorrect</div>';
+      $message  = '<div class="message-error">Email ou mot de passe incorrect</div>';
     }
   }
 
@@ -52,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $result = mysqli_query($con, $query);
     if (mysqli_num_rows($result) > 0) {
 
-      $signup_message = '<div class="message-error">Cet email est déjà utilisé</div>';
+      $message = '<div class="message-error">Cet email est déjà utilisé</div>';
     } else {
 
       $query = "SELECT MAX(id) AS max_id FROM utilisateur";
@@ -63,12 +62,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       if (!empty(trim($fname)) && !empty(trim($lname)) && !empty(trim($email)) && !empty(trim($password))) {
         $query = "INSERT INTO utilisateur(id, nom, prenom, email, pass, etat, is_admin) VALUES ('$newId', '$fname', '$lname', '$email', '$hashedPassword', 0, 0)";
         if (mysqli_query($con, $query)) {
-          $signup_message = '<div class="message-success">Utilisateur ajouté avec succès</div>';
+          $message = '<div class="message-success">Utilisateur ajouté avec succès</div>';
         } else {
-          $signup_message = '<div class="message-error">Erreur lors de l\'ajout de l\'utilisateur</div>';
+          $message = '<div class="message-error">Erreur lors de l\'ajout de l\'utilisateur</div>';
         }
       } else {
-        $signup_message = '<div class="message-error">Veuillez remplir tous les champs correctement</div>';
+        $message = '<div class="message-error">Veuillez remplir tous les champs correctement</div>';
       }
     }
   }
@@ -103,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <input type="email" placeholder="Email" name="email" />
         <input type="password" placeholder="Password" name="password" />
         <button type="submit" name="signup">Sign Up</button>
-        <div class="message"><?php echo $signup_message; ?>
+        <div class="message"><?php echo $message; ?>
         </div>
       </form>
     </div>
@@ -113,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <input type="email" placeholder="Email" name="login_email" />
         <input type="password" placeholder="Password" name="login_password" />
         <button type="submit" name="login">Sign In</button>
-        <div class="message"><?php echo $login_message; ?>
+        <div class="message"><?php echo $message; ?>
         </div>
       </form>
     </div>

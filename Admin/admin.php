@@ -141,24 +141,38 @@ if (!isset($_SESSION['user_id'])) {
       ?>
     </div>
     <div class="orders-list" id="ordersList" style="display: none">
-      <?php
-      $serveur = 'localhost';
-      $utilisateur = 'root';
-      $motdepasse = '';
-      $base_de_donnees = 'if0_36253541_glicious';
-      $con = new mysqli($serveur, $utilisateur, $motdepasse, $base_de_donnees);
-      if (!$con) {
-        die("Connection failed: " . mysqli_connect_error());
-      };
-      $sql = "SELECT c.id as cid, u.nom as lname, u.prenom as fname, o.id_produit as prod, o.quantite as quan FROM commande c
-                  Join utilisateur u on u.id=c.id_client
-                  Join ordproduit o on o.id_commande=c.id";
-      $res = mysqli_query($con, $sql);
-      while ($row = mysqli_fetch_assoc($res)) {
-        echo "<li>" . "Order Number: " . $row["cid"] . " Customer: " . $row["fname"] . " " . $row["lname"] . " Product ID: " . $row["prod"] . " Quantity bought: " . $row["quan"];
-      }
-      mysqli_close($con);
-      ?>
+    <?php
+$serveur = 'localhost';
+$utilisateur = 'root';
+$motdepasse = '';
+$base_de_donnees = 'if0_36253541_glicious';
+$con = new mysqli($serveur, $utilisateur, $motdepasse, $base_de_donnees);
+if (!$con) {
+  die("Connection failed: " . mysqli_connect_error());
+};
+$sql = "SELECT c.id as cid, u.nom as lname, u.prenom as fname, p.name as prod, o.quantite as quan FROM commande c
+            Join utilisateur u on u.id=c.id_client
+            Join ordproduit o on o.id_commande=c.id
+            Join produit p on p.id=o.id_produit 
+            order by c.id asc";
+$res = mysqli_query($con, $sql);
+
+$orders = [];
+while ($row = mysqli_fetch_assoc($res)) {
+  $orders[$row["cid"]][] = $row;
+}
+
+foreach ($orders as $orderId => $products) {
+  echo "<div class='order'>";
+  echo "<h2>Order Number: " . $orderId . "</h2>";
+  foreach ($products as $product) {
+    echo "<li>Customer: " . $product["fname"] . " " . $product["lname"] . " Product: " . $product["prod"] . " Quantity bought: " . $product["quan"] . "</li>";
+  }
+  echo "</div>";
+}
+
+mysqli_close($con);
+?>
     </div>
 
 
