@@ -28,7 +28,9 @@
         </li>
         <li>
           <a href="#" onclick="showOrders()">
+            <i class='bx bx-list-ul' ></i>
           <span class="links_name">Orders</span>
+          </a>
         </li>
         <li class="log_out" id="logOutButton">
           <a href="login/index.html">
