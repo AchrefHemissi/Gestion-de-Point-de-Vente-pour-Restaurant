@@ -55,6 +55,7 @@
           <input type="text" placeholder="Last Name" name="lname" />
           <input type="email" placeholder="Email" name="email"/>
           <input type="password" placeholder="Password" name="password"/>
+          <input type="text" placeholder="Adress" name="adress"/>
           <button>Sign Up</button>
         </form>
       </div>
