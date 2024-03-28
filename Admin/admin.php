@@ -132,7 +132,7 @@
                   Join utilisateur u on u.id=c.id_client
                   Join ordproduit o on o.id_commande=c.id";
             $res=mysqli_query($con,$sql);
-            while($row=mysqli_fetch_assoc($result))
+            while($row=mysqli_fetch_assoc($res))
             {
               echo "<li>"."Order Number: ".$row["cid"]." Customer: ".$row["fname"]." ".$row["lname"]." Product ID: ".$row["prod"]." Quantity bought: ".$row["quan"];
             }
