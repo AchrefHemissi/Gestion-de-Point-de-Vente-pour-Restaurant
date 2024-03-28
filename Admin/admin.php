@@ -180,7 +180,71 @@ mysqli_close($con);
   </section>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
   <script src="admin.js"></script>
-  <script src="chart.js"></script>
+  
+  <script>
+    const ctx = document.getElementById('myChart');
+    let chart;
+    function updateChart(){
+    fetch('fetchChart.php')
+    .then(response => response.json())
+    .then(data => {
+      if(chart){
+      chart.data.datasets[0].data = data;
+      chart.update();
+    }
+  
+  else{
+
+  chart = new Chart(ctx, {
+    type : 'bar',
+    data: {
+    labels : ["Pizza","Spaghetti","Tiramisu","Cheese Cake","Hamburger","Chawarma","Fried Chicken","Fries","Orange Juice","Detox"],
+    datasets: [{
+        label: 'Chart',
+        data: data,
+        backgroundColor: [
+      'rgba(255, 99, 132, 0.2)',
+      'rgba(255, 159, 64, 0.2)',
+      'rgba(255, 205, 86, 0.2)',
+      'rgba(75, 192, 192, 0.2)',
+      'rgba(54, 162, 235, 0.2)',
+      'rgba(153, 102, 255, 0.2)',
+      'rgba(201, 203, 207, 0.2)',
+      'rgba(255, 99, 132, 0.2)',
+      'rgba(54, 162, 235, 0.2)',
+      'rgba(255, 159, 64, 0.2)'
+    ],
+    borderColor: [
+      'rgb(255, 99, 132)',
+      'rgb(255, 159, 64)',
+      'rgb(255, 205, 86)',
+      'rgb(75, 192, 192)',
+      'rgb(54, 162, 235)',
+      'rgb(153, 102, 255)',
+      'rgb(201, 203, 207)',
+      'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+      'rgb(255, 159, 64)'
+
+    ],
+    borderWidth: 0.7,
+    barThickness:50
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  }
+);
+  }})
+};
+  updateChart();
+  setInterval(updateChart,2000);
+  </script>
 </body>
 
 </html>
