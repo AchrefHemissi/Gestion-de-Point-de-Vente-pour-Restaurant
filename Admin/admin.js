@@ -10,13 +10,22 @@ sidebarBtn.onclick = function() {
   function showCustomers() {
     document.getElementById("customersList").style.display = "block";
     document.getElementById("salesBoxes").style.display = "none";
+    document.getElementById("ordersList").style.display="none";
     document.querySelector(".chartcontainer").style.display="none";
   }
 
   function showDashboard() {
     document.getElementById("customersList").style.display = "none";
+    document.getElementById("ordersList").style.display="none";
     document.getElementById("salesBoxes").style.display = "flex";
     document.querySelector(".chartcontainer").style.display="flex";
+  }
+  function showOrders()
+  {
+    document.getElementById("customersList").style.display = "none";
+    document.getElementById("ordersList").style.display="block";
+    document.getElementById("salesBoxes").style.display = "none";
+    document.querySelector(".chartcontainer").style.display="none";
   }
 
  
