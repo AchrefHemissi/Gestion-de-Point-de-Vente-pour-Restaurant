@@ -37,6 +37,7 @@ if (!isset($_SESSION['user_id'])) {
       </li>
       <li>
         <a href="#" onclick="showOrders()">
+        <i class="bx bx-list-check"></i>
           <span class="links_name">Orders</span>
         </a>
       </li>
