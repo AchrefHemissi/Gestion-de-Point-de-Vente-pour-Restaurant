@@ -141,7 +141,7 @@ if (!isset($_SESSION['user_id'])) {
       mysqli_close($con);
       ?>
     </div>
-    <div class="orders-list" id="ordersList" style="display: none">
+    <div class="orders-list moving" id="ordersList" style="display: none">
     <?php
 $serveur = 'localhost';
 $utilisateur = 'root';
