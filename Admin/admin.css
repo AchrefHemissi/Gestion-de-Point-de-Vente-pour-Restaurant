@@ -497,3 +497,33 @@ nav .profile-details i{
 
 
  }
+ .order {
+  border: 1px solid #474646;
+  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 10px;
+  margin-right:30px;
+  margin-left:30px;
+  border-radius: 5px;
+  
+}
+.ord-detail{
+  display: flex;
+  flex-direction: column;
+}
+.done-button{
+  background-color: #0ccc2f;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.order-info {
+  margin-right: 10px;
+}
+
+.product-list {
+  display: block;
+}

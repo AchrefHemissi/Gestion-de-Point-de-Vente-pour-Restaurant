@@ -151,7 +151,7 @@ $con = new mysqli($serveur, $utilisateur, $motdepasse, $base_de_donnees);
 if (!$con) {
   die("Connection failed: " . mysqli_connect_error());
 };
-$sql = "SELECT c.id as cid, u.nom as lname, u.prenom as fname, p.name as prod, o.quantite as quan FROM commande c
+$sql = "SELECT c.id as cid,c.date_commande as cdate , u.nom as lname, u.prenom as fname, p.name as prod, o.quantite as quan FROM commande c
             Join utilisateur u on u.id=c.id_client
             Join ordproduit o on o.id_commande=c.id
             Join produit p on p.id=o.id_produit 
@@ -164,13 +164,31 @@ while ($row = mysqli_fetch_assoc($res)) {
 }
 
 foreach ($orders as $orderId => $products) {
+  $customerName = $products[0]["fname"] . " " . $products[0]["lname"];
+
   echo "<div class='order'>";
-  echo "<h2>Order Number: " . $orderId . "</h2>";
+
+echo '<div class="order-info">';
+echo '<span class="info-label">Order ID:&nbsp;&nbsp;&nbsp;</span>';
+echo '<span class="info-value"> ' . $orderId . ' &nbsp;&nbsp;&nbsp;</span>';
+echo '<span class="info-label">Customer :&nbsp;&nbsp;&nbsp;</span>';
+echo '<span class="info-value"> ' . $customerName . ' &nbsp;&nbsp;&nbsp;</span>';
+echo '<span class="info-label">Date :&nbsp;&nbsp;&nbsp;</span>';
+echo '<span class="info-value"> ' . $products[0]["cdate"] . ' &nbsp;&nbsp;&nbsp;</span>';
+echo '<button class="done-button" onclick="done(this)">Pending</button>';
+echo '</div>';
+
+  
+
+  echo '<div class="product-list">';
   foreach ($products as $product) {
-    echo "<li>Customer: " . $product["fname"] . " " . $product["lname"] . " Product: " . $product["prod"] . " Quantity bought: " . $product["quan"] . "</li>";
+    echo "<div class='ordproduct'><b>Product:&nbsp;&nbsp;&nbsp;</b> " . $product["prod"]. "&nbsp;&nbsp;&nbsp;". " <b>Quantity bought:&nbsp;&nbsp;&nbsp;</b> " . $product["quan"] . "</div>";
   }
+  echo '</div>';
+
   echo "</div>";
 }
+
 
 mysqli_close($con);
 ?>
