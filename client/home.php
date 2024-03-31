@@ -62,9 +62,9 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
          <p class="name"><?php echo $user['prenom'].' '.$user['nom']?></p>
          <div class="flex">
             <a href="profile.php" class="btn">profile</a>
-            <a href="#" class="delete-btn">logout</a>
+            <a href="logout.php" class="delete-btn">logout</a>
          </div>
-         <p class="account"><a href="../login/index.php">login</a> or <a href="register.html">register</a></p>
+    
       </div>
       </section>
     </header>

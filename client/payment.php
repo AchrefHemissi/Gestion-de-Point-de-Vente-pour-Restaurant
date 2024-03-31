@@ -15,6 +15,9 @@ if(!isset($_POST['order']) and !isset($_SESSION['payment_message']) ){
     
     $total=$_SESSION['total'];
 }
+if(isset($_POST['address'])){
+$_SESSION['address']=$_POST['address'];
+}
 // $total=$_SESSION['total'];
 ?>
 <!DOCTYPE html>

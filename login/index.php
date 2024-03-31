@@ -13,18 +13,32 @@ $message = '';
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
   if (isset($_POST['login'])) {
-    $email = mysqli_real_escape_string($con, $_POST['login_email']);
-    $password = mysqli_real_escape_string($con, $_POST['login_password']);
+    $email = $_POST['login_email'];
+    $password = $_POST['login_password'];
 
-    $query = "SELECT id, email, pass,etat,is_admin FROM utilisateur WHERE email='$email'";
-    $result = mysqli_query($con, $query);
-    $user = mysqli_fetch_assoc($result);
+    // Prepare the SQL statement
+    $query = "SELECT id, email, pass, etat, is_admin FROM utilisateur WHERE email=?";
+    $stmt = $con->prepare($query);
+
+    // Bind parameters
+    $stmt->bind_param("s", $email);
+
+    // Execute the statement
+    $stmt->execute();
+
+    // Get the result
+    $result = $stmt->get_result();
+
+    // Fetch the user data
+    $user = $result->fetch_assoc();
+
+    // Close the statement
+    $stmt->close();
 
 
     if ($user && password_verify($password, $user['pass'])) {
       $_SESSION['user_id'] = $user['id'];
-      unset($_SESSION['total']);
-      unset($_SESSION['cart']);
+      $_SESSION['user_email'] = $user['email'];
       if ($user['is_admin'] == 1) {
         header("Location: ../Admin/admin.php");
         exit;
@@ -32,8 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if ($user['etat'] == 1) {
           header("Location: baned.php");
         } else {
-          header("Location: ../client/home.php");
-        exit;
+          header("location: ../client/home.php");
         }
       }
     } else {
@@ -47,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $fname = mysqli_real_escape_string($con, $_POST['fname']);
     $lname = mysqli_real_escape_string($con, $_POST['lname']);
     $email = mysqli_real_escape_string($con, $_POST['email']);
+    $phone = mysqli_real_escape_string($con, $_POST['phone']);
     $password = mysqli_real_escape_string($con, $_POST['password']);
 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -64,14 +78,26 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       $newId = $row['max_id'] + 1;
 
       if (!empty(trim($fname)) && !empty(trim($lname)) && !empty(trim($email)) && !empty(trim($password))) {
-        $query = "INSERT INTO utilisateur(id, nom, prenom, email, pass, etat, is_admin) VALUES ('$newId', '$fname', '$lname', '$email', '$hashedPassword', 0, 0)";
-        if (mysqli_query($con, $query)) {
-          $message = '<div class="message-success">Utilisateur ajouté avec succès</div>';
+        $query = "INSERT INTO utilisateur(id, nom, prenom, email, pass, etat, is_admin, num_tel) VALUES (?, ?, ?, ?, ?, 0, 0, ?)";
+
+      // Prepare the statement
+        $stmt = $con->prepare($query);
+
+      // Bind parameters
+        $stmt->bind_param("issssi", $newId, $fname, $lname, $email, $hashedPassword, $phone);
+
+      // Execute the statement
+        if ($stmt->execute()) {
+          $message = '<div class="message-success">User added successfully </div>';
         } else {
-          $message = '<div class="message-error">Erreur lors de l\'ajout de l\'utilisateur</div>';
+          $message = '<div class="message-error">Error adding user</div>';
         }
+
+      // Close the statement
+        $stmt->close();
+
       } else {
-        $message = '<div class="message-error">Veuillez remplir tous les champs correctement</div>';
+        $message = '<div class="message-error">Please fill out all fields correctly </div>';
       }
     }
   }
@@ -104,6 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <input type="text" placeholder="First Name" name="fname" />
         <input type="text" placeholder="Last Name" name="lname" />
         <input type="email" placeholder="Email" name="email" />
+        <input type="tel" placeholder="Phone Number" name="phone" />
         <input type="password" placeholder="Password" name="password" />
         <button type="submit" name="signup">Sign Up</button>
         <div class="message"><?php echo $message; ?>

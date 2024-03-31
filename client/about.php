@@ -37,13 +37,13 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
    <section class="flex">
 
-      <a href="home.html" class="logo"><b>GL-icious </b> 😋</a>
+      <a href="home.php" class="logo"><b>GL-icious </b> 😋</a>
 
       <nav class="navbar">
-         <a href="home.html">home</a>
-         <a href="about.html">about</a>
-         <a href="menu.html">menu</a>
-         <a href="orders.html">orders</a>
+         <a href="home.php">home</a>
+         <a href="about.php">about</a>
+         <a href="menu.php">menu</a>
+         <a href="orders.php">orders</a>
          <a href="contact.html">contact</a>
       </nav>
 
@@ -58,9 +58,9 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
          <p class="name"><?php echo $user['prenom'].' '.$user['nom']?></p>
          <div class="flex">
             <a href="profile.php" class="btn">profile</a>
-            <a href="#" class="delete-btn">logout</a>
+            <a href="logout.php" class="delete-btn">logout</a>
          </div>
-         <p class="account"><a href="login.html">login</a> or <a href="register.html">register</a></p>
+
       </div>
 
    </section>
@@ -69,7 +69,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 <div class="heading">
    <h3>about us</h3>
-   <p><a href="home.html">home </a> <span> / about</span></p>
+   <p><a href="home.php">home </a> <span> / about</span></p>
 </div>
 
 <section class="about">
@@ -83,7 +83,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
       <div class="content">
          <h3>why choose us?</h3>
          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis non odit nihil, doloremque sunt aut placeat culpa. Adipisci minima, neque necessitatibus incidunt nemo eveniet mollitia quis facere vel consectetur culpa?</p>
-         <a href="menu.html" class="btn">our menu</a>
+         <a href="menu.php" class="btn">our menu</a>
       </div>
 
    </div>

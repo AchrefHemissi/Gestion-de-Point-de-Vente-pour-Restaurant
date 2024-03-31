@@ -83,9 +83,9 @@ if(!isset($_SESSION['user_id'])){
          <p class="name"><?php echo $user['prenom'].' '.$user['nom']?></p>
          <div class="flex">
             <a href="profile.php" class="btn">profile</a>
-            <a href="#" class="delete-btn">logout</a>
+            <a href="logout.php" class="delete-btn">logout</a>
          </div>
-         <p class="account"><a href="../login/index.php">login</a> or <a href="register.html">register</a></p>
+      
       </div>
       </section>
     </header>
@@ -119,7 +119,7 @@ if(!isset($_SESSION['user_id'])){
           <p>placed on : <span><?php echo $row['date_commande'] ?></span></p>
           <p>name : <span><?php echo $resultuser['prenom'] ?></span></p>
           <p>email : <span><?php echo $resultuser['email'] ?></span></p>
-          <p>address : <span>jogeshwari, mumbai, india - 400103</span></p>
+          <p>address : <span><?php echo $row['lieu'] ?></span></p>
           <p>your orders : <span><?php
                                         foreach($result2 as $row2 ){            
                                                     echo $row2['name'].'('.$row2['quantite'].') -';

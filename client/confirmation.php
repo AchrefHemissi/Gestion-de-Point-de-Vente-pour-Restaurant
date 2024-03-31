@@ -38,13 +38,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Insert into commande table
                     $orderSql = "INSERT INTO commande (id, id_client, date_commande, lieu, etat) VALUES (?, ?, ?,?,?)";
                     $orderStmt = $conn->prepare($orderSql);
-                    $orderStmt->execute([$totalligne + 1, $id_client, $date_commande, 'null', $etat]);
+                    $orderStmt->execute([$totalligne + 1, $id_client, $date_commande, $_SESSION['address'], $etat]);
 
                     // Insert into ordproduit table
                     $ordproductSql = "INSERT INTO ordproduit (id_commande, id_produit, quantite) VALUES (?, ?, ?)";
                     $ordproductStmt = $conn->prepare($ordproductSql); 
+
+                    // update colonne vendu de la table produit
+
+                    $updateProduitSql = "UPDATE produit SET vendu = vendu + ? WHERE id = ?";
+                    $updateProduitStmt = $conn->prepare($updateProduitSql);
+
                     foreach ($_SESSION['cart'] as $id => $item) {
                         $ordproductStmt->execute([$totalligne + 1, $item['id'], $item['quantity']]);
+                        $updateProduitStmt->execute([$item['quantity'], $item['id']]);
                     }
                     
                     // Update montant in cartebancaire table
@@ -98,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //$_SESSION['total']=0;
         ?>
         <p>Order placed successfully.</p>
-        <button onclick="location.href='home.html'">Return to Home</button>
+        <button onclick="location.href='home.php'">Return to Home</button>
     <?php } ?>
 </body>
 </html>
