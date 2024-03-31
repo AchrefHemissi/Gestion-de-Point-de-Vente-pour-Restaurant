@@ -12,8 +12,11 @@ if (!isset($_SESSION['user_id'])) {
 
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
   <title>Admin Dashboard</title>
-  <link rel="stylesheet" href="admin.css" />
+  <link rel="stylesheet" href="admin.css?v=1.4" />
   <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/png" href="logo.png" class="icone" />
@@ -39,6 +42,12 @@ if (!isset($_SESSION['user_id'])) {
         <a href="#" onclick="showOrders()">
         <i class="bx bx-list-check"></i>
           <span class="links_name">Orders</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" onclick="showMessages()">
+        <i class="bx bx-message"></i>
+          <span class="links_name">Messages</span>
         </a>
       </li>
       <li class="log_out" id="logOutButton">
@@ -135,7 +144,12 @@ if (!isset($_SESSION['user_id'])) {
         echo '<span class="info-label">Last Name:</span>';
         echo '<span class="info-value"> ' . $row['nom'] . ' </span>';
         echo '</div>';
-        echo '<button class="ban-button" onclick="ban(this)">Ban</button>';
+        if($row['etat'] == 1){
+          echo '<button class="ban-button" style="background-color:green" data-id="' . $row['id'] . '">Unban User</button>';
+        }
+        else{
+          echo '<button class="ban-button" data-id="' . $row['id'] . '">Ban User</button>';
+        }
         echo '</div>';
       }
       mysqli_close($con);
@@ -155,6 +169,7 @@ $sql = "SELECT c.id as cid,c.date_commande as cdate , u.nom as lname, u.prenom a
             Join utilisateur u on u.id=c.id_client
             Join ordproduit o on o.id_commande=c.id
             Join produit p on p.id=o.id_produit 
+            where c.etat=0
             order by c.id asc";
 $res = mysqli_query($con, $sql);
 
@@ -166,7 +181,7 @@ while ($row = mysqli_fetch_assoc($res)) {
 foreach ($orders as $orderId => $products) {
   $customerName = $products[0]["fname"] . " " . $products[0]["lname"];
 
-  echo "<div class='order'>";
+  echo '<div class="order" style="display:block" data-id='.$orderId .'>';
 
 echo '<div class="order-info">';
 echo '<span class="info-label">Order ID:&nbsp;&nbsp;&nbsp;</span>';
@@ -175,7 +190,7 @@ echo '<span class="info-label">Customer :&nbsp;&nbsp;&nbsp;</span>';
 echo '<span class="info-value"> ' . $customerName . ' &nbsp;&nbsp;&nbsp;</span>';
 echo '<span class="info-label">Date :&nbsp;&nbsp;&nbsp;</span>';
 echo '<span class="info-value"> ' . $products[0]["cdate"] . ' &nbsp;&nbsp;&nbsp;</span>';
-echo '<button class="done-button" onclick="done(this)">Pending</button>';
+echo '<button class="done-button">Pending</button>';
 echo '</div>';
 
   
@@ -192,13 +207,24 @@ echo '</div>';
 
 mysqli_close($con);
 ?>
-    </div>
+</div>
+  <div class="email-form" style=display:none id="emailForm">
+  <form action="sendEmail.php" method="post">
+    <label for="recipient">Recipient:</label><br>
+    <input type="email" id="recipient" name="recipient" required><br>
+    <label for="subject">Subject:</label><br>
+    <input type="text" id="subject" name="subject" required><br>
+    <label for="message">Message:</label><br>
+    <textarea id="message" name="message" required></textarea><br>
+    <input type="submit" value="Send Email">
+  </form>
+</div>
 
 
 
   </section>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
-  <script src="admin.js"></script>
+  <script src="admin.js?v=1.4"></script>
   
   <script>
     const ctx = document.getElementById('myChart');

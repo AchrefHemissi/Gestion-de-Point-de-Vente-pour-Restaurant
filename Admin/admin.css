@@ -527,3 +527,42 @@ nav .profile-details i{
 .product-list {
   display: block;
 }
+.email-form {
+  background: #ffdfd5 ;
+  width: 50%;
+  height: 50%;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #dc6f2c;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.email-form label {
+  font-weight: bold;
+}
+
+.email-form input[type="text"],
+.email-form input[type="email"],
+.email-form textarea {
+  resize: none;
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0 10px;
+  border: 2px solid #d75b32;
+  border-radius: 10px;
+}
+
+.email-form input[type="submit"] {
+  background-color: #4CAF50;
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+}
