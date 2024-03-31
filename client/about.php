@@ -1,3 +1,18 @@
+<?php
+session_start();
+if(!isset($_SESSION['user_id'])){
+   header("Location: ../login/index.php");
+   exit;
+}
+
+require_once 'connexionBD.php';
+$conn = ConnexionBD::getInstance();
+$query = "SELECT * FROM utilisateur WHERE id = ?";
+$stmt = $conn->prepare($query);
+$stmt->execute([$_SESSION['user_id']]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,15 +49,15 @@
 
       <div class="icons">
          <a href="search.html"><i class="fas fa-search"></i></a>
-         <a href="cart.php"><i class="fas fa-shopping-cart"></i><span>(3)</span></a>
+         <a href="cart.php"><i class="fas fa-shopping-cart"></i><span><?php echo isset($_SESSION['cart']) ? '('.count($_SESSION['cart']).')' : 0; ?></span></a>
          <div id="user-btn" class="fas fa-user"></div>
          <div id="menu-btn" class="fas fa-bars"></div>
       </div>
 
       <div class="profile">
-         <p class="name">shaikh anas</p>
+         <p class="name"><?php echo $user['prenom'].' '.$user['nom']?></p>
          <div class="flex">
-            <a href="profile.html" class="btn">profile</a>
+            <a href="profile.php" class="btn">profile</a>
             <a href="#" class="delete-btn">logout</a>
          </div>
          <p class="account"><a href="login.html">login</a> or <a href="register.html">register</a></p>

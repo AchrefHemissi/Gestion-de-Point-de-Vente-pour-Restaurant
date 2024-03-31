@@ -1,15 +1,26 @@
+<?php
+session_start();
+if(!isset($_SESSION['user_id'])){
+  header("Location: ../login/index.php");
+  exit;
+}
+require_once 'connexionBD.php';
+$conn = ConnexionBD::getInstance();
+$query = "SELECT * FROM utilisateur WHERE id = ?";
+$stmt = $conn->prepare($query);
+$stmt->execute([$_SESSION['user_id']]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>home</title>
-
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/swiper@8/swiper-bundle.min.css"
-    />
+    <title>food menu</title>
 
     <!-- font awesome cdn link  -->
     <link
@@ -24,12 +35,12 @@
   <body>
     <header class="header">
       <section class="flex">
-        <a href="home.html" class="logo"> <b>GL-icious </b> 😋</a>
+        <a href="home.html" class="logo"><b>GL-icious </b> 😋</a>
 
         <nav class="navbar">
-          <a href="home.html">home</a>
+          <a href="home.php">home</a>
           <a href="about.php">about</a>
-          <a href="menu.html">menu</a>
+          <a href="menu.php">menu</a>
           <a href="orders.php">orders</a>
           <a href="contact.html">contact</a>
         </nav>
@@ -37,92 +48,27 @@
         <div class="icons">
           <a href="search.html"><i class="fas fa-search"></i></a>
           <a href="cart.php"
-            ><i class="fas fa-shopping-cart"></i><span>(3)</span></a
+            ><i class="fas fa-shopping-cart"></i><span><?php echo isset($_SESSION['cart']) ? '('.count($_SESSION['cart']).')' : 0; ?></span></a
           >
           <div id="user-btn" class="fas fa-user"></div>
           <div id="menu-btn" class="fas fa-bars"></div>
         </div>
 
         <div class="profile">
-          <p class="name">shaikh anas</p>
-          <div class="flex">
-            <a href="profile.html" class="btn">profile</a>
+         <p class="name"><?php echo $user['prenom'].' '.$user['nom']?></p>
+         <div class="flex">
+            <a href="profile.php" class="btn">profile</a>
             <a href="#" class="delete-btn">logout</a>
-          </div>
-          <p class="account">
-            <a href="login.html">login</a> or
-            <a href="register.html">register</a>
-          </p>
-        </div>
+         </div>
+         <p class="account"><a href="../login/index.php">login</a> or <a href="register.html">register</a></p>
+      </div>
       </section>
     </header>
 
-    <section class="home">
-      <div class="swiper home-slider">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide slide">
-            <div class="content">
-              <span>order online</span>
-              <h3>delicious pizza</h3>
-              <a href="menu.html" class="btn">see menus</a>
-            </div>
-            <div class="image">
-              <img src="images/home-img-1.png" alt="" />
-            </div>
-          </div>
-
-          <div class="swiper-slide slide">
-            <div class="content">
-              <span>order online</span>
-              <h3>double hamburger</h3>
-              <a href="menu.html" class="btn">see menus</a>
-            </div>
-            <div class="image">
-              <img src="images/home-img-2.png" alt="" />
-            </div>
-          </div>
-
-          <div class="swiper-slide slide">
-            <div class="content">
-              <span>order online</span>
-              <h3>roasted chicken</h3>
-              <a href="menu.html" class="btn">see menus</a>
-            </div>
-            <div class="image">
-              <img src="images/home-img-3.png" alt="" />
-            </div>
-          </div>
-        </div>
-
-        <div class="swiper-pagination"></div>
-      </div>
-    </section>
-
-    <section class="category">
-      <h1 class="title">food category</h1>
-
-      <div class="box-container">
-        <a href="category.html" class="box">
-          <img src="images/cat-1.png" alt="" />
-          <h3>fast food</h3>
-        </a>
-
-        <a href="category.html" class="box">
-          <img src="images/cat-2.png" alt="" />
-          <h3>main dishes</h3>
-        </a>
-
-        <a href="category.html" class="box">
-          <img src="images/cat-3.png" alt="" />
-          <h3>drinks</h3>
-        </a>
-
-        <a href="category.html" class="box">
-          <img src="images/cat-4.png" alt="" />
-          <h3>desserts</h3>
-        </a>
-      </div>
-    </section>
+    <div class="heading">
+      <h3>our menu</h3>
+      <p><a href="home.php">home </a> <span> / menu</span></p>
+    </div>
 
     <section class="products">
       <h1 class="title">latest dishes</h1>
@@ -167,10 +113,10 @@
           <a href="category.html" class="cat">dishes</a>
           <div class="name">Spaghetti</div>
           <div class="flex">
-            <div class="price"><span>$</span>3<span>/-</span></div>
+            <div class="price"><span>$</span>4.5<span>/-</span></div>
             <input hidden name="id" value = "2">
             <input hidden name="name" value = "Spaghetti">
-            <input hidden name="price" value = "3">
+            <input hidden name="price" value = "4.5">
             <input hidden name="imglink" value = "images/spaghetti.jpg">
 
             <input
@@ -196,10 +142,10 @@
           <a href="category.html" class="cat">fast food</a>
           <div class="name"> Hamburger </div>
           <div class="flex">
-            <div class="price"><span>$</span>3<span>/-</span></div>
+            <div class="price"><span>$</span>11<span>/-</span></div>
             <input hidden name="id" value = "3">
             <input hidden name="name" value = "Hamburger">
-            <input hidden name="price" value = "3">
+            <input hidden name="price" value = "11">
             <input hidden name="imglink" value = "uploaded_img/burger-1.png">
             <input
               type="number"
@@ -224,10 +170,10 @@
           <a href="category.html" class="cat">dessert</a>
           <div class="name">Cheese Cake </div>
           <div class="flex">
-            <div class="price"><span>$</span>3<span>/-</span></div>
+            <div class="price"><span>$</span>5<span>/-</span></div>
             <input hidden name="id" value = "4">
             <input hidden name="name" value = "Cheese Cake">
-            <input hidden name="price" value = "3">
+            <input hidden name="price" value = "5">
             <input hidden name="imglink" value = "images/cheesecake.jpg">
             <input
               type="number"
@@ -252,10 +198,10 @@
           <a href="category.html" class="cat">drinks</a>
           <div class="name">Orange Juice</div>
           <div class="flex">
-            <div class="price"><span>$</span>3<span>/-</span></div>
+            <div class="price"><span>$</span>7<span>/-</span></div>
             <input hidden name="id" value = "5">
             <input hidden name="name" value = "Orange Juice">
-            <input hidden name="price" value = "3">
+            <input hidden name="price" value = "7">
             <input hidden name="imglink" value = "uploaded_img/drink-1.png">
             <input
               type="number"
@@ -280,10 +226,10 @@
           <a href="category.html" class="cat">dishes</a>
           <div class="name">Chawarma</div>
           <div class="flex">
-            <div class="price"><span>$</span>3<span>/-</span></div>
+            <div class="price"><span>$</span>14<span>/-</span></div>
             <input hidden name="id" value = "6">
             <input hidden name="name" value = "Chawarma">
-            <input hidden name="price" value = "3">
+            <input hidden name="price" value = "14">
             <input hidden name="imglink" value = "images/chawarma.avif">
             <input
               type="number"
@@ -296,10 +242,119 @@
             />
           </div>
         </form>
-      </div>
 
-      <div class="more-btn">
-        <a href="menu.html" class="btn">veiw all</a>
+        <form action = "cart.php" accept="" method="post" class="box">
+          <a href="quick_view.html" class="fas fa-eye"></a>
+          <button
+            class="fas fa-shopping-cart"
+            type="submit"
+            name="add_to_cart"
+          ></button>
+          <img src="images/fries.jpg" alt="" />
+          <a href="category.html" class="cat">fast food</a>
+          <div class="name">Fries</div>
+          <div class="flex">
+            <div class="price"><span>$</span>7<span>/-</span></div>
+            <input hidden name="id" value = "7">
+            <input hidden name="name" value = "Fries">
+            <input hidden name="price" value = "7">
+            <input hidden name="imglink" value = "images/fries.jpg">
+            <input
+              type="number"
+              name="qty"
+              class="qty"
+              min="1"
+              max="99"
+              value="1"
+              onkeypress="if(this.value.length == 2) return false;"
+            />
+          </div>
+        </form>
+
+        <form action = "cart.php" accept="" method="post" class="box">
+          <a href="quick_view.html" class="fas fa-eye"></a>
+          <button
+            class="fas fa-shopping-cart"
+            type="submit"
+            name="add_to_cart"
+          ></button>
+          <img src="images/FriedChicken.jpg" alt="" />
+          <a href="category.html" class="cat">fast food</a>
+          <div class="name">Fried Chicken</div>
+          <div class="flex">
+            <div class="price"><span>$</span>13<span>/-</span></div>
+            <input hidden name="id" value = "8">
+            <input hidden name="name" value = "Fried Chicken">
+            <input hidden name="price" value = "13">
+            <input hidden name="imglink" value = "images/FriedChicken.jpg">
+            <input
+              type="number"
+              name="qty"
+              class="qty"
+              min="1"
+              max="99"
+              value="1"
+              onkeypress="if(this.value.length == 2) return false;"
+            />
+          </div>
+        </form>
+
+        <form action = "cart.php" accept="" method="post" class="box">
+          <a href="quick_view.html" class="fas fa-eye"></a>
+          <button
+            class="fas fa-shopping-cart"
+            type="submit"
+            name="add_to_cart"
+          ></button>
+          <img src="images/mojito.avif" alt="" />
+          <a href="category.html" class="cat">drinks</a>
+          <div class="name">Mojito </div>
+          <div class="flex">
+            <div class="price"><span>$</span>7<span>/-</span></div>
+            <input hidden name="id" value = "9">
+            <input hidden name="name" value = "Mojito">
+            <input hidden name="price" value = "7">
+            <input hidden name="imglink" value = "images/mojito.avif">
+            <input
+              type="number"
+              name="qty"
+              class="qty"
+              min="1"
+              max="99"
+              value="1"
+              onkeypress="if(this.value.length == 2) return false;"
+            />
+          </div>
+        </form>
+
+
+        <form action = "cart.php" accept="" method="post" class="box">
+          <a href="quick_view.html" class="fas fa-eye"></a>
+          <button
+            class="fas fa-shopping-cart"
+            type="submit"
+            name="add_to_cart"
+          ></button>
+          <img src="uploaded_img/dessert-2.png" alt="" />
+          <a href="category.html" class="cat">dessert</a>
+          <div class="name">Tiramisu</div>
+          <div class="flex">
+            <div class="price"><span>$</span>10<span>/-</span></div>
+            <input hidden name="id" value = "10">
+            <input hidden name="name" value = "Tiramisu">
+            <input hidden name="price" value = "10">
+            <input hidden name="imglink" value = "uploaded_img/dessert-2.png">
+            <input
+              type="number"
+              name="qty"
+              class="qty"
+              min="1"
+              max="99"
+              value="1"
+              onkeypress="if(this.value.length == 2) return false;"
+            />
+          </div>
+        </form>
       </div>
     </section>
 
@@ -307,20 +362,6 @@
       <img src="images/loader.gif" alt="" />
     </div>
 
-    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
-
     <script src="js/script.js"></script>
-
-    <script>
-      var swiper = new Swiper(".home-slider", {
-        loop: true,
-        grabCursor: true,
-        effect: "flip",
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-      });
-    </script>
   </body>
 </html>

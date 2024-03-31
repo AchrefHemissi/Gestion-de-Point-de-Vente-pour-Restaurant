@@ -1,19 +1,34 @@
+<?php 
+session_start();
+if(empty($_SESSION['cart'])){
+   $_SESSION['cart_message'] = "Your cart is empty.";
+   
+   header("Location: cart.php");
+   exit();
+}
+
+$cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
+$total = isset($_SESSION['total']) ? $_SESSION['total'] : 0;
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>register</title>
+   <title>checkout</title>
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
    <!-- custom css file link  -->
    <link rel="stylesheet" href="css/style.css">
-
    <link rel="shortcut icon" type="x-icon" href="images/logo.png" />
-   
+
 </head>
 <body>
    
@@ -33,7 +48,7 @@
 
       <div class="icons">
          <a href="search.html"><i class="fas fa-search"></i></a>
-         <a href="cart.php"><i class="fas fa-shopping-cart"></i><span>(3)</span></a>
+         <a href="cart.php"><i class="fas fa-shopping-cart"></i><?php echo isset($_SESSION['cart']) ? '('.count($_SESSION['cart']).')' : 0; ?></a>
          <div id="user-btn" class="fas fa-user"></div>
          <div id="menu-btn" class="fas fa-bars"></div>
       </div>
@@ -51,43 +66,47 @@
 
 </header>
 
-<section class="form-container">
+<div class="heading">
+   <h3>checkout</h3>
+   <p><a href="home.html">home </a> <span> / checkout</span></p>
+</div>
 
-   <form action="" method="post">
-      <h3>your address</h3>
-      <input type="text" maxlength="50" placeholder="flat no. and building name" required class="box" name="flat">
-      <input type="text" maxlength="50" placeholder="area name" required class="box" name="street">
-      <input type="text" maxlength="50" placeholder="city name" required class="box" name="city">
-      <input type="text" maxlength="50" placeholder="state name" required class="box" name="state">
-      <input type="text" maxlength="50" placeholder="country name" required class="box" name="country">
-      <input type="number" min="0" max="999999" placeholder="pin code" required class="box" name="pin_code" onkeypress="if(this.value.length == 6) return false;">
-      <input type="submit" value="save address" name="submit" class="btn">
+<section class="checkout">
+
+   <h1 class="title">order summary</h1>
+
+   <form action="payment.php" method="post">
+      <div class="cart-items">
+         <h3>cart items</h3>
+        <?php
+
+        foreach($cart as $id => $item): 
+        ?>
+            <p><span class="name"><?php echo $item['name'].'  '.$item['quantity'] ?></span><span class="price"><?php echo ($item['quantity']*$item['price']).'$'?></span></p>
+        <?php endforeach; ?>
+         <p class="grand-total"><span class="name">grand total :</span> <span class="price"><?php echo $total.'$'?></span></p>
+         <a href="cart.php" class="btn">view cart</a>
+      </div>
+      <div class="user-info">
+         <h3>your info</h3>
+         <p><i class="fas fa-user"></i> <span>shaikh anas</span></p>
+         <p><i class="fas fa-phone"></i> <span>1234567890</span></p>
+         <p><i class="fas fa-envelope"></i> <span>shaikhanas@gmail.com</span></p>
+         <a href="update_profile.html" class="btn">update info</a>
+         <h3>delivery address</h3>
+         <p class="address"><i class="fas fa-map-marker-alt"></i> <span>flat no. 1, building no. 1, jogeshwari west, mumbai, india - 400104</span></p>
+         <a href="update_address.html" class="btn">update address</a>
+         <select name="method" class="box"  required>
+            <option value="" disabled selected>select payment method</option>
+            <!-- <option value="cash on delivery">cash on delivery</option> -->
+            <option value="credit card">credit card</option>
+            
+        </select>
+      </div>
+      <input type="submit" value="place order" name="order" class="btn order-btn">
    </form>
 
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <footer class="footer">
 

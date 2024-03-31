@@ -1,4 +1,19 @@
-<!DOCTYPE html>
+<?php
+session_start();
+if(!isset($_SESSION['user_id'])){
+  header("Location: ../login/index.php");
+  exit;
+}
+require_once 'connexionBD.php';
+$conn = ConnexionBD::getInstance();
+$query = "SELECT * FROM utilisateur WHERE id = ?";
+$stmt = $conn->prepare($query);
+$stmt->execute([$_SESSION['user_id']]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+
+?>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -27,9 +42,9 @@
         <a href="home.html" class="logo"> <b>GL-icious </b> 😋</a>
 
         <nav class="navbar">
-          <a href="home.html">home</a>
+          <a href="home.php">home</a>
           <a href="about.php">about</a>
-          <a href="menu.html">menu</a>
+          <a href="menu.php">menu</a>
           <a href="orders.php">orders</a>
           <a href="contact.html">contact</a>
         </nav>
@@ -37,23 +52,20 @@
         <div class="icons">
           <a href="search.html"><i class="fas fa-search"></i></a>
           <a href="cart.php"
-            ><i class="fas fa-shopping-cart"></i><span>(3)</span></a
+            ><i class="fas fa-shopping-cart"></i><span><?php echo isset($_SESSION['cart']) ? '('.count($_SESSION['cart']).')' : 0; ?></span></a
           >
           <div id="user-btn" class="fas fa-user"></div>
           <div id="menu-btn" class="fas fa-bars"></div>
         </div>
 
         <div class="profile">
-          <p class="name">shaikh anas</p>
-          <div class="flex">
-            <a href="profile.html" class="btn">profile</a>
+         <p class="name"><?php echo $user['prenom'].' '.$user['nom']?></p>
+         <div class="flex">
+            <a href="profile.php" class="btn">profile</a>
             <a href="#" class="delete-btn">logout</a>
-          </div>
-          <p class="account">
-            <a href="login.html">login</a> or
-            <a href="register.html">register</a>
-          </p>
-        </div>
+         </div>
+         <p class="account"><a href="../login/index.php">login</a> or <a href="register.html">register</a></p>
+      </div>
       </section>
     </header>
 
@@ -127,6 +139,7 @@
     <section class="products">
       <h1 class="title">latest dishes</h1>
 
+     
       <div class="box-container">
         <form action = "cart.php"  method="post" class="box">
           <a href="quick_view.html" class="fas fa-eye"></a>
@@ -167,10 +180,10 @@
           <a href="category.html" class="cat">dishes</a>
           <div class="name">Spaghetti</div>
           <div class="flex">
-            <div class="price"><span>$</span>3<span>/-</span></div>
+            <div class="price"><span>$</span>4.5<span>/-</span></div>
             <input hidden name="id" value = "2">
             <input hidden name="name" value = "Spaghetti">
-            <input hidden name="price" value = "3">
+            <input hidden name="price" value = "4.5">
             <input hidden name="imglink" value = "images/spaghetti.jpg">
 
             <input
@@ -196,10 +209,10 @@
           <a href="category.html" class="cat">fast food</a>
           <div class="name"> Hamburger </div>
           <div class="flex">
-            <div class="price"><span>$</span>3<span>/-</span></div>
+            <div class="price"><span>$</span>11<span>/-</span></div>
             <input hidden name="id" value = "3">
             <input hidden name="name" value = "Hamburger">
-            <input hidden name="price" value = "3">
+            <input hidden name="price" value = "11">
             <input hidden name="imglink" value = "uploaded_img/burger-1.png">
             <input
               type="number"
@@ -224,10 +237,10 @@
           <a href="category.html" class="cat">dessert</a>
           <div class="name">Cheese Cake </div>
           <div class="flex">
-            <div class="price"><span>$</span>3<span>/-</span></div>
+            <div class="price"><span>$</span>5<span>/-</span></div>
             <input hidden name="id" value = "4">
             <input hidden name="name" value = "Cheese Cake">
-            <input hidden name="price" value = "3">
+            <input hidden name="price" value = "5">
             <input hidden name="imglink" value = "images/cheesecake.jpg">
             <input
               type="number"
@@ -252,10 +265,10 @@
           <a href="category.html" class="cat">drinks</a>
           <div class="name">Orange Juice</div>
           <div class="flex">
-            <div class="price"><span>$</span>3<span>/-</span></div>
+            <div class="price"><span>$</span>7<span>/-</span></div>
             <input hidden name="id" value = "5">
             <input hidden name="name" value = "Orange Juice">
-            <input hidden name="price" value = "3">
+            <input hidden name="price" value = "7">
             <input hidden name="imglink" value = "uploaded_img/drink-1.png">
             <input
               type="number"
@@ -280,10 +293,10 @@
           <a href="category.html" class="cat">dishes</a>
           <div class="name">Chawarma</div>
           <div class="flex">
-            <div class="price"><span>$</span>3<span>/-</span></div>
+            <div class="price"><span>$</span>14<span>/-</span></div>
             <input hidden name="id" value = "6">
             <input hidden name="name" value = "Chawarma">
-            <input hidden name="price" value = "3">
+            <input hidden name="price" value = "14">
             <input hidden name="imglink" value = "images/chawarma.avif">
             <input
               type="number"
@@ -299,7 +312,7 @@
       </div>
 
       <div class="more-btn">
-        <a href="menu.html" class="btn">veiw all</a>
+        <a href="menu.php" class="btn">veiw all</a>
       </div>
     </section>
 
