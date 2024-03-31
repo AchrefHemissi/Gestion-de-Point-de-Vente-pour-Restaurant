@@ -25,8 +25,8 @@
 
 <body>
     <div class="message">
-        <h1>Vous avez été banni</h1>
-        <p>Pour plus d'informations, vous pouvez contacter notre service client via email à serviceclient@votresite.com</p>
+        <h1>You're Banned 😔😔</h1>
+        <p>For more information, you can contact our customer service via email at gl.icious.team@gmail.com</p>
     </div>
 </body>
 
