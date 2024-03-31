@@ -20,6 +20,11 @@ if(!isset($_SESSION['user_id'])){
  if (!$conn) {
      die("Connection failed: " . $conn->connect_error);
  }
+ $query = "SELECT * FROM utilisateur WHERE id = ?";
+ $stmt = $conn->prepare($query);
+ $stmt->execute([$_SESSION['user_id']]);
+ $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
     $querycom="select * from commande where id_client=".$_SESSION['user_id']."";
     $stmtcom = $conn->prepare($querycom);
     $stmtcom->execute();
@@ -58,9 +63,9 @@ if(!isset($_SESSION['user_id'])){
         <a href="home.html" class="logo"><b>GL-icious </b> 😋</a>
 
         <nav class="navbar">
-          <a href="home.html">home</a>
-          <a href="about.html">about</a>
-          <a href="menu.html">menu</a>
+          <a href="home.php">home</a>
+          <a href="about.php">about</a>
+          <a href="menu.php">menu</a>
           <a href="orders.php">orders</a>
           <a href="contact.html">contact</a>
         </nav>
@@ -75,16 +80,13 @@ if(!isset($_SESSION['user_id'])){
         </div>
 
         <div class="profile">
-          <p class="name">shaikh anas</p>
-          <div class="flex">
-            <a href="profile.html" class="btn">profile</a>
+         <p class="name"><?php echo $user['prenom'].' '.$user['nom']?></p>
+         <div class="flex">
+            <a href="profile.php" class="btn">profile</a>
             <a href="#" class="delete-btn">logout</a>
-          </div>
-          <p class="account">
-            <a href="login.html">login</a> or
-            <a href="register.html">register</a>
-          </p>
-        </div>
+         </div>
+         <p class="account"><a href="../login/index.php">login</a> or <a href="register.html">register</a></p>
+      </div>
       </section>
     </header>
 

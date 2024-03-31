@@ -49,6 +49,12 @@ if (!empty($_SESSION['cart'])) {
  else {
     echo "No data submitted.";
 }
+require_once 'connexionBD.php';
+$conn = ConnexionBD::getInstance();
+$query = "SELECT * FROM utilisateur WHERE id = ?";
+$stmt = $conn->prepare($query);
+$stmt->execute([$_SESSION['user_id']]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 ?>
 <!DOCTYPE html>
@@ -78,7 +84,7 @@ if (!empty($_SESSION['cart'])) {
       <nav class="navbar">
          <a href="home.php">home</a>
          <a href="about.php">about</a>
-         <a href="menu.html">menu</a>
+         <a href="menu.php">menu</a>
          <a href="orders.php">orders</a>
          <a href="contact.html">contact</a>
       </nav>
@@ -97,7 +103,7 @@ if (!empty($_SESSION['cart'])) {
             <a href="profile.php" class="btn">profile</a>
             <a href="#" class="delete-btn">logout</a>
          </div>
-         <p class="account"><a href="login.html">login</a> or <a href="register.html">register</a></p>
+         <p class="account"><a href="../login/index.php">login</a> or <a href="register.html">register</a></p>
       </div>
 
 
@@ -107,7 +113,7 @@ if (!empty($_SESSION['cart'])) {
 
 <div class="heading">
    <h3>shopping cart</h3>
-   <p><a href="home.html">home </a> <span> / cart</span></p>
+   <p><a href="home.php">home </a> <span> / cart</span></p>
 </div>
 
 <section class="products">

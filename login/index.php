@@ -23,6 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     if ($user && password_verify($password, $user['pass'])) {
       $_SESSION['user_id'] = $user['id'];
+      unset($_SESSION['total']);
+      unset($_SESSION['cart']);
       if ($user['is_admin'] == 1) {
         header("Location: ../Admin/admin.php");
         exit;
@@ -30,6 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if ($user['etat'] == 1) {
           header("Location: baned.php");
         } else {
+          header("Location: ../client/home.php");
+        exit;
         }
       }
     } else {

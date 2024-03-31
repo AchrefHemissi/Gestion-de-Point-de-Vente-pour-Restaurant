@@ -40,9 +40,9 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
       <a href="home.html" class="logo"><b>GL-icious </b> 😋</a>
 
       <nav class="navbar">
-         <a href="home.html">home</a>
+         <a href="home.php">home</a>
          <a href="about.php">about</a>
-         <a href="menu.html">menu</a>
+         <a href="menu.php">menu</a>
          <a href="orders.php">orders</a>
          <a href="contact.html">contact</a>
       </nav>
@@ -60,7 +60,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
             <a href="profile.php" class="btn">profile</a>
             <a href="#" class="delete-btn">logout</a>
          </div>
-         <p class="account"><a href="login.html">login</a> or <a href="register.html">register</a></p>
+         <p class="account"><a href="../login/index.php">login</a> or <a href="register.html">register</a></p>
       </div>
 
    </section>
@@ -69,7 +69,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 <div class="heading">
    <h3>my profile</h3>
-   <p><a href="home.html">home </a> <span> / profile</span></p>
+   <p><a href="home.php">home </a> <span> / profile</span></p>
 </div>
 
 <section class="user-details">
