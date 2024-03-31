@@ -24,7 +24,9 @@ function calculateTotal() {
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = array();
 }
-
+if (!isset($_SESSION['total'])) {
+    $_SESSION['total'] = 0;
+}
 
 
 if(isset($_POST['id']) && isset($_POST['qty'])) {
@@ -74,28 +76,30 @@ if (!empty($_SESSION['cart'])) {
       <a href="home.html" class="logo"><b>GL-icious </b> 😋</a>
 
       <nav class="navbar">
-         <a href="home.html">home</a>
-         <a href="about.html">about</a>
+         <a href="home.php">home</a>
+         <a href="about.php">about</a>
          <a href="menu.html">menu</a>
-         <a href="orders.html">orders</a>
+         <a href="orders.php">orders</a>
          <a href="contact.html">contact</a>
       </nav>
 
       <div class="icons">
          <a href="search.html"><i class="fas fa-search"></i></a>
-         <a href="cart.php"><i class="fas fa-shopping-cart"></i><span>(3)</span></a>
+         <a href="cart.php"><i class="fas fa-shopping-cart"></i><?php echo isset($_SESSION['cart']) ? '('.count($_SESSION['cart']).')' : 0; ?>
+</span></a>
          <div id="user-btn" class="fas fa-user"></div>
          <div id="menu-btn" class="fas fa-bars"></div>
       </div>
 
       <div class="profile">
-         <p class="name">shaikh anas</p>
+         <p class="name"><?php echo $user['prenom'].' '.$user['nom']?></p>
          <div class="flex">
-            <a href="profile.html" class="btn">profile</a>
+            <a href="profile.php" class="btn">profile</a>
             <a href="#" class="delete-btn">logout</a>
          </div>
          <p class="account"><a href="login.html">login</a> or <a href="register.html">register</a></p>
       </div>
+
 
    </section>
 
@@ -113,7 +117,19 @@ if (!empty($_SESSION['cart'])) {
    
 
    <div class="box-container">
+   <style>
+    .message {
+        font-size: 25px;
+        color: red;
+    }
+</style>
+
    <?php
+
+if (isset($_SESSION['cart_message'])) {
+    echo '<p class="message">' . $_SESSION['cart_message'] . '</p>';
+    unset($_SESSION['cart_message']);
+}
 
 $cart = $_SESSION['cart'];
 $total = 0; 
@@ -128,11 +144,12 @@ foreach ($cart as $id=>$item):
         <div class="price"><span><?php echo $item['price']?> $</span></div>
         <input type="number" readonly name="qty" class="qty" min="1" max="99" value='<?php echo intval($item['quantity']) ?>'>
     </div>
-    <div class="sub-total">total : <span><?php echo intval($item['quantity']) * intval($item['price']); ?></span></div>
+    <div class="sub-total">total : <span><?php echo (intval($item['quantity']) * ($item['price'])).'$'; ?></span></div>
 </div>
 <?php
-$total += intval($item['quantity']) * intval($item['price']);
+$total += intval($item['quantity']) * ($item['price']);
 endforeach;
+$_SESSION['total'] = $total;
 ?>
 
 
@@ -150,6 +167,8 @@ endforeach;
                             // Remove the product box from the DOM if deletion is successful
                             btn.parentElement.remove();
                             //auto reload the page
+                            window.location.href = 'cart.php';
+                            
                         } else {
                             console.error('Failed to delete product.');
                         }
@@ -170,8 +189,8 @@ endforeach;
       
 </div>
 <div class="cart-total">
-      <p>grand total : <span> <?php echo $total ?> </span></p>
-      <a href="checkout.html" class="btn">checkout orders</a>
+      <p>grand total : <span> <?php echo $total.'$' ?> </span></p>
+      <a href="checkout.php" class="btn">checkout orders</a>
       </div>
    </div>
 
