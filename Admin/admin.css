@@ -243,54 +243,25 @@ nav .profile-details i{
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 .home-content .sales-boxes .sales-details{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  text-align: center;
+  color:#0ccc2f;
+  font-size: 100px;
 }
 .sales-boxes .box .title{
   font-size: 24px;
   font-weight: 500;
   /* margin-bottom: 10px; */
 }
-.sales-boxes .sales-details li.topic{
-  font-size: 20px;
-  font-weight: 500;
-}
-.sales-boxes .sales-details li{
-  list-style: none;
-  margin: 8px 0;
-}
-.sales-boxes .sales-details li a{
-  font-size: 18px;
-  color: #333;
-  font-size: 400;
-  text-decoration: none;
-}
-.sales-boxes .box .button{
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-}
-.sales-boxes .box .button a{
-  color: #fff;
-  background:#d75b32;
-  padding: 4px 12px;
-  font-size: 15px;
-  font-weight: 400;
-  border-radius: 4px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-.sales-boxes .box .button a:hover{
-  background:  #f18c6b;
-}
+
+
 
 /* Right box */
 .home-content .sales-boxes .top-sales{
   width: 35%;
+  margin-left: auto;
+  margin-right: auto;
   background: #fff;
   padding: 20px 30px;
-  margin: 0 20px 0 0;
   border-radius: 12px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
@@ -298,7 +269,6 @@ nav .profile-details i{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 10px 0;
 }
 .sales-boxes .top-sales li a img{
   height: 40px;
@@ -355,7 +325,6 @@ nav .profile-details i{
     margin-bottom: 30px;
   }
   .home-content .sales-boxes .top-sales{
-    margin: 0;
   }
 }
 @media (max-width: 1000px) {
@@ -565,4 +534,15 @@ nav .profile-details i{
   border: none;
   cursor: pointer;
   border-radius: 10px;
+}
+
+.totalCustomers{
+  width: 35%;
+  height:35%;
+  margin-left: auto;
+  margin-right: auto;
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }

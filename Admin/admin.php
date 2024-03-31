@@ -65,56 +65,27 @@ if (!isset($_SESSION['user_id'])) {
         <span class="dashboard">Dashboard</span>
       </div>
       <div class="profile-details">
-        <img src="admin.jpg" alt="" />
+        <img src="logo.png" alt="" />
         <span class="admin_name">Admin</span>
         <i class="bx bx-chevron-down"></i>
       </div>
     </nav>
     <div class="home-content">
       <div class="sales-boxes" id="salesBoxes">
-        <div class="recent-sales box moving">
-          <div class="title">Recent Orders</div>
-          <?php
-          $serveur = 'localhost';
-          $utilisateur = 'root';
-          $motdepasse = '';
-          $base_de_donnees = 'if0_36253541_glicious';
-          $con = new mysqli($serveur, $utilisateur, $motdepasse, $base_de_donnees);
-          if (!$con) {
-            die("Connection failed: " . mysqli_connect_error());
-          }
-          $sql = "SELECT * FROM commande";
-          $result = mysqli_query($con, $sql);
-          echo "<ul>";
-          while ($row = mysqli_fetch_assoc($result)) {
-            echo "<li>" . "Order ID : " . $row['id'] . " - " . "Client ID: " . $row['id_client'] . " - " . "Date: " . $row['date_commande'] . "</li>";
-          }
-          echo "</ul>";
-          mysqli_close($con);
-          ?>
-        </div>
+
         <div class="top-sales box moving">
-          <div class="title">Top Selling Products</div>
-          <ul class="top-sales-details">
-            <?php
-            $serveur = 'localhost';
-            $utilisateur = 'root';
-            $motdepasse = '';
-            $base_de_donnees = 'if0_36253541_glicious';
-            $con = new mysqli($serveur, $utilisateur, $motdepasse, $base_de_donnees);
-            if (!$con) {
-              die("Connection failed: " . mysqli_connect_error());
-            }
-            $sql = "SELECT * FROM produit order by vendu desc limit 3 ";
-            $result = mysqli_query($con, $sql);
-            echo "<ul>";
-            while ($row = mysqli_fetch_assoc($result)) {
-              echo "<li>" . $row['name'] . " : " . $row['vendu'] . " units" . "</li>";
-            }
-            echo "</ul>";
-            mysqli_close($con);
-            ?>
-          </ul>
+          <div class="title"><b>Top Selling Products</b></div>
+          <ul class="top-sales-details" id="product-list">
+</ul>
+          
+        </div>
+        <div class="totalCustomers moving">
+          <div style="text-align:center;font-size:22px"><b>Total Customers</b></div>
+          <div class="sales-details">
+            
+          </div>
+
+
         </div>
       </div>
       <div class="chartcontainer center moving">
@@ -156,58 +127,8 @@ if (!isset($_SESSION['user_id'])) {
       ?>
     </div>
     <div class="orders-list moving" id="ordersList" style="display: none">
-    <?php
-$serveur = 'localhost';
-$utilisateur = 'root';
-$motdepasse = '';
-$base_de_donnees = 'if0_36253541_glicious';
-$con = new mysqli($serveur, $utilisateur, $motdepasse, $base_de_donnees);
-if (!$con) {
-  die("Connection failed: " . mysqli_connect_error());
-};
-$sql = "SELECT c.id as cid,c.date_commande as cdate , u.nom as lname, u.prenom as fname, p.name as prod, o.quantite as quan FROM commande c
-            Join utilisateur u on u.id=c.id_client
-            Join ordproduit o on o.id_commande=c.id
-            Join produit p on p.id=o.id_produit 
-            where c.etat=0
-            order by c.id asc";
-$res = mysqli_query($con, $sql);
-
-$orders = [];
-while ($row = mysqli_fetch_assoc($res)) {
-  $orders[$row["cid"]][] = $row;
-}
-
-foreach ($orders as $orderId => $products) {
-  $customerName = $products[0]["fname"] . " " . $products[0]["lname"];
-
-  echo '<div class="order" style="display:block" data-id='.$orderId .'>';
-
-echo '<div class="order-info">';
-echo '<span class="info-label">Order ID:&nbsp;&nbsp;&nbsp;</span>';
-echo '<span class="info-value"> ' . $orderId . ' &nbsp;&nbsp;&nbsp;</span>';
-echo '<span class="info-label">Customer :&nbsp;&nbsp;&nbsp;</span>';
-echo '<span class="info-value"> ' . $customerName . ' &nbsp;&nbsp;&nbsp;</span>';
-echo '<span class="info-label">Date :&nbsp;&nbsp;&nbsp;</span>';
-echo '<span class="info-value"> ' . $products[0]["cdate"] . ' &nbsp;&nbsp;&nbsp;</span>';
-echo '<button class="done-button">Pending</button>';
-echo '</div>';
-
-  
-
-  echo '<div class="product-list">';
-  foreach ($products as $product) {
-    echo "<div class='ordproduct'><b>Product:&nbsp;&nbsp;&nbsp;</b> " . $product["prod"]. "&nbsp;&nbsp;&nbsp;". " <b>Quantity bought:&nbsp;&nbsp;&nbsp;</b> " . $product["quan"] . "</div>";
-  }
-  echo '</div>';
-
-  echo "</div>";
-}
-
-
-mysqli_close($con);
-?>
-</div>
+    
+    </div>
   <div class="email-form" style=display:none id="emailForm">
   <form action="sendEmail.php" method="post">
     <label for="recipient">Recipient:</label><br>
@@ -290,6 +211,113 @@ mysqli_close($con);
   updateChart();
   setInterval(updateChart,2000);
   </script>
+
+
+  <script>
+     async function fetchOrders() {
+        const response =  await fetch('get_order.php');
+        const orders = await  response.json();
+
+        // Clear the current orders
+        document.querySelector('.orders-list').innerHTML = '';
+
+        // Loop over the orders and display them
+        for (let orderId in orders) {
+            let firstOrderItem = orders[orderId][0];
+            let customerName = firstOrderItem.fname + ' ' + firstOrderItem.lname;
+            let cdate = firstOrderItem.cdate;
+
+            let orderHTML = `
+                <div class="order" style="display:block" data-id="${orderId}">
+                    <div class="order-info">
+                        <span class="info-label">Order ID:&nbsp;&nbsp;&nbsp;</span>
+                        <span class="info-value">${orderId}&nbsp;&nbsp;&nbsp;</span>
+                        <span class="info-label">Customer :&nbsp;&nbsp;&nbsp;</span>
+                        <span class="info-value">${customerName}&nbsp;&nbsp;&nbsp;</span>
+                        <span class="info-label">Date :&nbsp;&nbsp;&nbsp;</span>
+                        <span class="info-value">${cdate}&nbsp;&nbsp;&nbsp;</span>
+                    </div>
+            `;
+
+            orders[orderId].forEach(orderItem => {
+                let productName = orderItem.prod;
+                let quantity = orderItem.quan;
+                orderHTML += `
+                    <div class="order-item">
+                        <span class="info-label">Product :&nbsp;&nbsp;&nbsp;</span>
+                        <span class="info-value">${productName}&nbsp;&nbsp;&nbsp;</span>
+                        <span class="info-label">Quantity :&nbsp;&nbsp;&nbsp;</span>
+                        <span class="info-value">${quantity}&nbsp;&nbsp;&nbsp;</span>
+                    </div>
+                `;
+            });
+
+            orderHTML += `<button class="done-button">Pending</button></div>`;
+            document.querySelector('.orders-list').insertAdjacentHTML('beforeend', orderHTML);
+        }
+        document.querySelectorAll('.done-button').forEach(button => {
+        button.addEventListener('click', function() {
+            var orderDiv = this.parentElement;
+            var orderId = orderDiv.getAttribute('data-id');
+
+            var formData = new FormData();
+            formData.append('id', orderId);
+
+            fetch('update_order.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+              
+            });
+
+            orderDiv.style.display = 'none';
+        });
+    });
+    
+}
+
+// Fetch orders every 5 seconds
+fetchOrders();
+setInterval(fetchOrders, 5000);
+</script>
+
+<script>
+  async function calcCustomers(){
+    const response = await fetch('calculate_customers.php');
+    const data = await response.text();
+    console.log(data);
+    document.querySelector('.sales-details').innerHTML = `<p style="font-size: 40px;">${data}</p>`;
+  }
+  calcCustomers();
+  setInterval(calcCustomers, 5000);
+</script>
+
+
+<script>
+
+function fetchProducts() {
+  fetch('top_selling.php')
+    .then(response => response.json())
+    .then(data => {
+      const productList = document.getElementById('product-list');
+      productList.innerHTML = '';
+      data.forEach(product => {
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `<b>${product.name} </b>${product.vendu} unit`;
+        productList.appendChild(listItem);
+      });
+    });
+}
+
+// Fetch products every 5 seconds
+fetchProducts();
+setInterval(fetchProducts, 5000);
+
+</script>
+
+
 </body>
 
 </html>

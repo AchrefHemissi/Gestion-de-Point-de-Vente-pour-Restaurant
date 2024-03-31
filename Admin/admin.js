@@ -66,30 +66,7 @@ sidebarBtn.onclick = function() {
     });
 });
 
-document.querySelectorAll('.done-button').forEach(button => {
 
-button.addEventListener('click',function(){
-
-  var orderDiv=this.parentElement.parentElement;
-  var orderId = orderDiv.getAttribute('data-id');
-
-        var formData = new FormData();
-        formData.append('id', orderId);
-
-        fetch('update_order.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.text())
-        .then(data => {
-            // Handle the response from the server...
-        });
-  orderDiv.style.display='none';
-
-})
-
-
-})
   
 
 
