@@ -939,3 +939,10 @@ section{
 
 }
 
+.button
+{
+   font-size:large;
+   background-color: lightgray;
+   z-index:10;
+}
+
