@@ -130,7 +130,9 @@ if(!isset($_SESSION['user_id'])){
           <p>total price : <span><?php echo $prix.'$' ?></span></p>
           <p>payment method : <span> master carte</span></p>
           <p>payment status : <span>pending</span></p>
+          <button class="button" id="button">Save as PDF</button>
         </div>
+        
 <?php endforeach; ?>
        
       </div>
@@ -139,7 +141,6 @@ if(!isset($_SESSION['user_id'])){
     <div class="loader">
       <img src="images/loader.gif" alt="" />
     </div>
-
     <script src="js/script.js"></script>
   </body>
 </html>
