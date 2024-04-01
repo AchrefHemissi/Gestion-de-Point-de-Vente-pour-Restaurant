@@ -60,7 +60,6 @@ html{
 }
 
 section{
-   display: grid;
    max-width: 1200px;
    margin:0 auto;
    padding:2rem;
@@ -974,7 +973,7 @@ section{
    align-items: flex-start;
 }
 
-#pdfbutton{
+.pdfbutton{
    width: 30%;
    height: 45px;
    margin-left: 35%;
@@ -983,7 +982,7 @@ section{
    color:#f8e1da
    
 }
-#pdfbutton:hover{
+.pdfbutton:hover{
    background-color: #f5825c;
    
 }

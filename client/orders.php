@@ -129,7 +129,7 @@ if(!isset($_SESSION['user_id'])){
                                 ?></span></p>
           <p><b>total price : </b><span><?php echo $prix.'$' ?></span></p>
           <p><b>payment method :</b> <span> Master Card</span></p>
-          <button class="button" id="pdfbutton">Save as PDF</button>
+          <button  class="pdfbutton">Save as PDF</button>
         </div>
         
 <?php endforeach; ?>
@@ -142,8 +142,43 @@ if(!isset($_SESSION['user_id'])){
     </div>
     <script src="js/script.js"></script>
     <script>
-      
+      var buttons = document.querySelectorAll('.pdfbutton');
+buttons.forEach(function(button) {
+    button.addEventListener('click', function() {
+        var parentDiv = this.parentElement;
+        var clone = parentDiv.cloneNode(true); // Clone the parent div
+        var button = clone.querySelector('.pdfbutton'); // Select the button from the clone
+        button.parentNode.removeChild(button); // Remove the button from the clone
+
+        clone.style.fontFamily = 'Montserrat, sans-serif';
+        var wrapper = document.createElement('div');
+        wrapper.style.display = 'flex';
+        wrapper.style.justifyContent = 'center';
+        wrapper.style.alignItems = 'center';
+        wrapper.style.height = '100vh'; 
+        wrapper.appendChild(clone);
+
+        var html = wrapper.innerHTML; // Get the HTML of the clone
+
+        var formData = new FormData();
+        formData.append('html', html);
+
+        fetch('generate_pdf.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            // The PDF was generated successfully
+            window.location.href = data;
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    });
+});
     </script>
+
 
 
   </body>
