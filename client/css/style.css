@@ -60,6 +60,7 @@ html{
 }
 
 section{
+   display: grid;
    max-width: 1200px;
    margin:0 auto;
    padding:2rem;
@@ -974,14 +975,17 @@ section{
 }
 
 #pdfbutton{
-   width: 20%;
-   margin-left: 40%;
+   width: 30%;
+   height: 45px;
+   margin-left: 35%;
    background-color: #e24938;
    border-radius: 10px;
    color:#f8e1da
+   
 }
 #pdfbutton:hover{
    background-color: #f5825c;
+   
 }
 
 .delete-btn{
