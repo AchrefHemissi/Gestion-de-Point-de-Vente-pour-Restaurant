@@ -15,30 +15,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   if (isset($_POST['login'])) {
     $email = $_POST['login_email'];
     $password = $_POST['login_password'];
-
-    // Prepare the SQL statement
     $query = "SELECT id, email, pass, etat, is_admin FROM utilisateur WHERE email=?";
     $stmt = $con->prepare($query);
-
-    // Bind parameters
     $stmt->bind_param("s", $email);
-
-    // Execute the statement
     $stmt->execute();
-
-    // Get the result
     $result = $stmt->get_result();
-
-    // Fetch the user data
     $user = $result->fetch_assoc();
-
-    // Close the statement
     $stmt->close();
-
 
     if ($user && password_verify($password, $user['pass'])) {
       $_SESSION['user_id'] = $user['id'];
-      $_SESSION['user_email'] = $user['email'];
+      unset($_SESSION['total']);
+      unset($_SESSION['cart']);
       if ($user['is_admin'] == 1) {
         header("Location: ../Admin/admin.php");
         exit;
@@ -46,7 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if ($user['etat'] == 1) {
           header("Location: baned.php");
         } else {
-          header("location: ../client/home.php");
+          header("Location: ../client/home.php");
+          exit;
         }
       }
     } else {
@@ -77,25 +66,17 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       $row = mysqli_fetch_assoc($result);
       $newId = $row['max_id'] + 1;
 
-      if (!empty(trim($fname)) && !empty(trim($lname)) && !empty(trim($email)) && !empty(trim($password))) {
+      if (!empty(trim($fname)) && !empty(trim($lname)) && !empty(trim($email)) && !empty(trim($password) && preg_match("/^[0-9]{8}$/", $phone))) { // preg_match("/^[0-9]{8}$/", $phone) pour verifier que $phone est un nombre de 8 chiffres
         $query = "INSERT INTO utilisateur(id, nom, prenom, email, pass, etat, is_admin, num_tel) VALUES (?, ?, ?, ?, ?, 0, 0, ?)";
 
-      // Prepare the statement
         $stmt = $con->prepare($query);
-
-      // Bind parameters
-        $stmt->bind_param("issssi", $newId, $fname, $lname, $email, $hashedPassword, $phone);
-
-      // Execute the statement
+        $stmt->bind_param("issssi", $newId, $fname, $lname, $email, $hashedPassword, $phone); //"issssi" specifies the types of the variables that will be bound: i corresponds to an integer and s corresponds to a string
         if ($stmt->execute()) {
           $message = '<div class="message-success">User added successfully </div>';
         } else {
           $message = '<div class="message-error">Error adding user</div>';
         }
-
-      // Close the statement
         $stmt->close();
-
       } else {
         $message = '<div class="message-error">Please fill out all fields correctly </div>';
       }

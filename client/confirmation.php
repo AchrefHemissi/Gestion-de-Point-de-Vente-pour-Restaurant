@@ -69,6 +69,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
             } catch(PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
+                $_SESSION['payment_message'] = $e->getMessage();
+                header("Location: payment.php");
+                exit();
             }
 
             // Close database connection
@@ -76,17 +79,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
         } else {
             // Credit card information not provided
-            echo "Please provide valid credit card information.";
+            $_SESSION['payment_message'] = "please provide valide info.";
+            header("Location: payment.php");
+            exit();
         }
         
     } else {
         // Required POST variables not set
         echo "Error: Required POST variables not set.";
+        header("Location: home.php");
     }
     
 } else {
     // Form not submitted using POST method
     echo "Error: Form not submitted using POST method.";
+    header("Location: home.php");
 }
 ?>
 

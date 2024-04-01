@@ -44,7 +44,7 @@ if(isset($_POST['id']) && isset($_POST['qty'])) {
 // Add an item to the cart
 
 
-if (!empty($_SESSION['cart'])) {
+/*if (!empty($_SESSION['cart'])) {
     foreach ($_SESSION['cart'] as $id => $item) {
         echo "Product ID: " . $id . " - Quantity: " . $item['quantity'] . "<br>";
     }
@@ -52,7 +52,7 @@ if (!empty($_SESSION['cart'])) {
 }    
  else {
     echo "No data submitted.";
-}
+}*/
 require_once 'connexionBD.php';
 $conn = ConnexionBD::getInstance();
 $query = "SELECT * FROM utilisateur WHERE id = ?";

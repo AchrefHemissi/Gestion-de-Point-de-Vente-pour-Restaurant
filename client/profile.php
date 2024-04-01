@@ -77,7 +77,8 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
       <img src="images/user-icon.png" alt="">
       <p><i class="fas fa-user"></i> <span><?php echo $user['prenom'].' '.$user['nom'] ?></span></p>
       <p><i class="fas fa-envelope"></i> <span><?php echo $user['email'] ?></span></p>
-      <a href="update_profile.html" class="btn">update profile</a>
+      <p><i class="fas fa-phone"></i> <span><?php echo $user['num_tel'] ?></span></p>
+      
       
    </div>
 
