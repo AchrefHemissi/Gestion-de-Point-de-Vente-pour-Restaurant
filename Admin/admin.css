@@ -533,16 +533,3 @@ nav .profile-details i {
   border-radius: 12px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
-
-#notification {
-  display: none;
-  position: fixed;
-  top: 90%;
-  right: 20px; /* Ajustez la valeur selon vos préférences */
-  transform: translateY(-50%);
-  padding: 10px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 9999;
-}
