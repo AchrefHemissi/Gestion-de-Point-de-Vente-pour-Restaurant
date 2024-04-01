@@ -129,8 +129,9 @@ if (!isset($_SESSION['user_id'])) {
 
     </div>
 
-    <div class="email-form" id="emailForm">
-      <form id="sendEmailForm">
+    </div>
+    <div class="email-form" style=display:none id="emailForm">
+      <form action="sendEmail.php" method="post">
         <label for="recipient">Recipient:</label><br>
         <input type="email" id="recipient" name="recipient" required><br>
         <label for="subject">Subject:</label><br>
@@ -139,44 +140,9 @@ if (!isset($_SESSION['user_id'])) {
         <textarea id="message" name="message" required></textarea><br>
         <input type="submit" value="Send Email">
       </form>
-      <div id="notification">
-        <div id="notification-content"></div>
-        <button id="dismissNotification">Dismiss</button>
-      </div>
     </div>
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="admin.js?v=1.4"></script>
-    <script>
-      $(document).ready(function() {
-        $('#sendEmailForm').submit(function(e) {
-          e.preventDefault(); // empêche le rechargement de la page 
-          var formData = $(this).serialize();
-          $.ajax({
-            type: 'POST',
-            url: 'sendEmail.php',
-            data: formData,
-            success: function(response) {
-              if (response.success) {
-                $('#notification-content').html('<div style="color: green;">' + response.message + '</div>');
-                $('#notification').show();
-                $('#recipient').val('');
-                $('#subject').val('');
-                $('#message').val('');
-              } else {
-                $('#notification-content').html('<div style="color: red;">' + response.message + '</div>');
-                $('#notification').show();
-              }
-            },
-            error: function(xhr, status, error) {
-              $('#notification-content').html('<div style="color: red;">Une erreur est survenue lors de l\'envoi de l\'e-mail. Veuillez réessayer plus tard.</div>');
-              $('#notification').show();
-            }
-          });
-        });
-      });
-    </script>
 
   </section>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>

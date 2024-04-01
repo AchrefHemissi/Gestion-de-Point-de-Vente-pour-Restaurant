@@ -15,8 +15,6 @@ $message = $_POST['message'];
 // Initialize PHPMailer
 $mail = new PHPMailer(true);
 
-$response = array('success' => false, 'message' => '');
-
 try {
     // Set mailer to use SMTP
     $mail->isSMTP();
@@ -39,14 +37,12 @@ try {
 
     // Send email
     $mail->send();
-    //echo 'Email sent successfully';
-    $response['success'] = true;
-    $response['message'] = 'E-mail envoyé avec succès!';
+    echo 'Email sent successfully ce lien expire automatiquement après 3 secondes.';
 } catch (Exception $e) {
-    //echo "Error: {$mail->ErrorInfo}";
-    $response['message'] = 'Une erreur est survenue lors de l\'envoi de l\'e-mail. Veuillez réessayer plus tard.';
+    echo "Error: {$mail->ErrorInfo}" + " ce lien expire automatiquement après 3 secondes.";
 }
-
-
-header('Content-Type: application/json');
-echo json_encode($response);
+echo "<script>
+setTimeout(function(){
+    window.location.href = 'admin.php';
+}, 3000);
+</script>";

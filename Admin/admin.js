@@ -61,7 +61,3 @@ document.querySelectorAll(".ban-button").forEach((button) => {
       });
   });
 });
-
-$("#dismissNotification").click(function () {
-  $("#notification").hide();
-});
