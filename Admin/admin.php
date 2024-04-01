@@ -129,7 +129,7 @@ if (!isset($_SESSION['user_id'])) {
 
     </div>
 
-    <div class="email-form" style=display:none id="emailForm">
+    <div class="email-form" id="emailForm">
       <form id="sendEmailForm">
         <label for="recipient">Recipient:</label><br>
         <input type="email" id="recipient" name="recipient" required><br>
