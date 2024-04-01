@@ -116,21 +116,22 @@ if(!isset($_SESSION['user_id'])){
     
             ?>
         
-        <div class="box">
-          <p>placed on : <span><?php echo $row['date_commande'] ?></span></p>
-          <p>name : <span><?php echo $resultuser['prenom'] ?></span></p>
-          <p>email : <span><?php echo $resultuser['email'] ?></span></p>
-          <p>address : <span><?php echo $row['lieu'] ?></span></p>
-          <p>your orders : <span><?php
+        <div class="orderbox box">
+          <p><b>Placed on :</b> <span><?php echo $row['date_commande'] ?></span></p>
+          <p><b>Name : </b><span><?php echo $resultuser['prenom'] ?></span></p>
+          <p><b>Email :</b> <span><?php echo $resultuser['email'] ?></span></p>
+          <p><b>Address :</b> <span><?php echo $row['lieu'] ?></span></p>
+          <p><b>Your Orders :</b> <span><?php
                                         foreach($result2 as $row2 ){            
                                                     echo $row2['name'].'('.$row2['quantite'].') -';
                                                    $prix+=$row2['prix']*$row2['quantite'];
                                                 }
                                 ?></span></p>
-          <p>total price : <span><?php echo $prix.'$' ?></span></p>
-          <p>payment method : <span> master carte</span></p>
-          <p>payment status : <span>pending</span></p>
+          <p><b>total price : </b><span><?php echo $prix.'$' ?></span></p>
+          <p><b>payment method :</b> <span> Master Card</span></p>
+          <button  class="pdfbutton">Save as PDF</button>
         </div>
+        
 <?php endforeach; ?>
        
       </div>
@@ -139,7 +140,46 @@ if(!isset($_SESSION['user_id'])){
     <div class="loader">
       <img src="images/loader.gif" alt="" />
     </div>
-
     <script src="js/script.js"></script>
+    <script>
+      var buttons = document.querySelectorAll('.pdfbutton');
+buttons.forEach(function(button) {
+    button.addEventListener('click', function() {
+        var parentDiv = this.parentElement;
+        var clone = parentDiv.cloneNode(true); // Clone the parent div
+        var button = clone.querySelector('.pdfbutton'); // Select the button from the clone
+        button.parentNode.removeChild(button); // Remove the button from the clone
+
+        clone.style.fontFamily = 'Montserrat, sans-serif';
+        var wrapper = document.createElement('div');
+        wrapper.style.display = 'flex';
+        wrapper.style.justifyContent = 'center';
+        wrapper.style.alignItems = 'center';
+        wrapper.style.height = '100vh'; 
+        wrapper.appendChild(clone);
+
+        var html = wrapper.innerHTML; // Get the HTML of the clone
+
+        var formData = new FormData();
+        formData.append('html', html);
+
+        fetch('generate_pdf.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            // The PDF was generated successfully
+            window.location.href = data;
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    });
+});
+    </script>
+
+
+
   </body>
 </html>

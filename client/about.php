@@ -84,7 +84,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
          <div class="content">
             <h3>why choose us?</h3>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis non odit nihil, doloremque sunt aut placeat culpa. Adipisci minima, neque necessitatibus incidunt nemo eveniet mollitia quis facere vel consectetur culpa?</p>
+            <p>Indulge in our restaurant's unique fusion of flavors, crafted with locally-sourced ingredients, and experience unparalleled dining satisfaction</p>
             <a href="menu.php" class="btn">our menu</a>
          </div>
 
@@ -101,19 +101,18 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
          <div class="box">
             <img src="images/step-1.png" alt="">
             <h3>select food</h3>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, hic.</p>
+            <p>Easy access to the whole menu</p>
          </div>
 
          <div class="box">
             <img src="images/step-2.png" alt="">
             <h3>30 minutes delivery</h3>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, hic.</p>
+            <p>Get your order in just 30 minutes - fast, reliable delivery guaranteed!</p>
          </div>
 
          <div class="box">
             <img src="images/step-3.png" alt="">
             <h3>enjoy food!</h3>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, hic.</p>
          </div>
 
       </div>
@@ -138,7 +137,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
          <div class="box">
             <img src="images/map-icon.png" alt="">
             <h3>our address</h3>
-            <a href="https://www.google.com/maps">676 Centre Urbain Nord BP, Tunis 1080</a>
+            <a href="https://www.google.com/maps/place/National+Institute+of+Applied+Science+and+Technology/@36.8429603,10.1830144,15z/data=!4m10!1m2!2m1!1s+676+Centre+Urbain+Nord+BP,+Tunis+1080!3m6!1s0x12fd34c6d1e93bef:0x4153c4733f285343!8m2!3d36.8429605!4d10.1970209!15sCiU2NzYgQ2VudHJlIFVyYmFpbiBOb3JkIEJQLCBUdW5pcyAxMDgwIgOIAQGSARFwdWJsaWNfdW5pdmVyc2l0eeABAA!16s%2Fm%2F0h52xyw?entry=ttu">676 Centre Urbain Nord BP, Tunis 1080</a>
          </div>
 
 

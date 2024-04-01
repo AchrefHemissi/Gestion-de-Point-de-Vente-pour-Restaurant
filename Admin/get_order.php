@@ -1,9 +1,6 @@
     <?php
-    $serveur = 'localhost';
-    $utilisateur = 'root';
-    $motdepasse = '';
-    $base_de_donnees = 'if0_36253541_glicious';
-    $con = new mysqli($serveur, $utilisateur, $motdepasse, $base_de_donnees);
+    require_once 'connexionAdminDB.php';
+    $con = Database::getInstance();
     if (!$con) {
       die("Connection failed: " . mysqli_connect_error());
     };
