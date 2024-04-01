@@ -137,7 +137,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
          <div class="box">
             <img src="images/map-icon.png" alt="">
             <h3>our address</h3>
-            <a href="https://www.google.com/maps">676 Centre Urbain Nord BP, Tunis 1080</a>
+            <a href="https://www.google.com/maps/place/National+Institute+of+Applied+Science+and+Technology/@36.8429603,10.1830144,15z/data=!4m10!1m2!2m1!1s+676+Centre+Urbain+Nord+BP,+Tunis+1080!3m6!1s0x12fd34c6d1e93bef:0x4153c4733f285343!8m2!3d36.8429605!4d10.1970209!15sCiU2NzYgQ2VudHJlIFVyYmFpbiBOb3JkIEJQLCBUdW5pcyAxMDgwIgOIAQGSARFwdWJsaWNfdW5pdmVyc2l0eeABAA!16s%2Fm%2F0h52xyw?entry=ttu">676 Centre Urbain Nord BP, Tunis 1080</a>
          </div>
 
 

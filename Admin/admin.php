@@ -236,7 +236,7 @@ if (!isset($_SESSION['user_id'])) {
                         <span class="info-value">${orderId}&nbsp;&nbsp;&nbsp;</span><br>
                         <span class="info-label">Customer :&nbsp;&nbsp;&nbsp;</span>
                         <span class="info-value">${customerName}&nbsp;&nbsp;&nbsp;</span><br>
-                        <span class="info-label">Customer numbre :&nbsp;&nbsp;&nbsp;</span>
+                        <span class="info-label">Customer number :&nbsp;&nbsp;&nbsp;</span>
                         <span class="info-value">${num}&nbsp;&nbsp;&nbsp;</span><br>
                         <span class="info-label">location :&nbsp;&nbsp;&nbsp;</span>
                         <span class="info-value">${lieu}&nbsp;&nbsp;&nbsp;</span><br>
