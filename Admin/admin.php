@@ -5,6 +5,7 @@ if (!isset($_SESSION['user_id'])) {
   header("Location: ../login/index.php");
   exit;
 }
+require_once 'connexionAdminDB.php';
 ?>
 
 <!DOCTYPE html>
@@ -96,11 +97,7 @@ if (!isset($_SESSION['user_id'])) {
     </div>
     <div class="customers-list moving" id="customersList" style="display: none">
       <?php
-      $serveur = 'localhost';
-      $utilisateur = 'root';
-      $motdepasse = '';
-      $base_de_donnees = 'if0_36253541_glicious';
-      $con = new mysqli($serveur, $utilisateur, $motdepasse, $base_de_donnees);
+      $con = Database::getInstance();
       if (!$con) {
         die("Connection failed: " . mysqli_connect_error());
       };

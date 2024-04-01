@@ -1,13 +1,10 @@
 <?php
 // Get the customer ID from the request
+require_once 'connexionAdminDB.php';
 $customerId = $_POST['id'];
 
 // Connect to the database
-$serveur = 'localhost';
-$utilisateur = 'root';
-$motdepasse = '';
-$base_de_donnees = 'if0_36253541_glicious';
-$con = new mysqli($serveur, $utilisateur, $motdepasse, $base_de_donnees);
+$con = Database::getInstance();
 
 $query = $con->prepare('SELECT etat FROM utilisateur WHERE id = ?');
 $query->bind_param('i', $customerId);
