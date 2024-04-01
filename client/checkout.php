@@ -96,7 +96,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
          <p><i class="fas fa-envelope"></i> <span><?php echo $user['email'] ?></span></p>
          
          <h3>delivery address</h3>
-         <p class="address"><i class="fas fa-map-marker-alt"></i> <input class="textaddress" type="text" required placeholder="adress ici" name="address"></p>
+         <p class="address"><i class="fas fa-map-marker-alt"></i> <input class="textaddress" type="text" required placeholder="Write Address Here" name="address"></p>
         
          <select name="method" class="box"  required>
             <option value="" disabled selected>select payment method</option>

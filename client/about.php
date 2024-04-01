@@ -84,7 +84,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
          <div class="content">
             <h3>why choose us?</h3>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis non odit nihil, doloremque sunt aut placeat culpa. Adipisci minima, neque necessitatibus incidunt nemo eveniet mollitia quis facere vel consectetur culpa?</p>
+            <p>Indulge in our restaurant's unique fusion of flavors, crafted with locally-sourced ingredients, and experience unparalleled dining satisfaction</p>
             <a href="menu.php" class="btn">our menu</a>
          </div>
 
@@ -101,19 +101,18 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
          <div class="box">
             <img src="images/step-1.png" alt="">
             <h3>select food</h3>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, hic.</p>
+            <p>Easy access to the whole menu</p>
          </div>
 
          <div class="box">
             <img src="images/step-2.png" alt="">
             <h3>30 minutes delivery</h3>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, hic.</p>
+            <p>Get your order in just 30 minutes - fast, reliable delivery guaranteed!</p>
          </div>
 
          <div class="box">
             <img src="images/step-3.png" alt="">
             <h3>enjoy food!</h3>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, hic.</p>
          </div>
 
       </div>

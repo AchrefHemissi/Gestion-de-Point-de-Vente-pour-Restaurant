@@ -116,21 +116,20 @@ if(!isset($_SESSION['user_id'])){
     
             ?>
         
-        <div class="box">
-          <p>placed on : <span><?php echo $row['date_commande'] ?></span></p>
-          <p>name : <span><?php echo $resultuser['prenom'] ?></span></p>
-          <p>email : <span><?php echo $resultuser['email'] ?></span></p>
-          <p>address : <span><?php echo $row['lieu'] ?></span></p>
-          <p>your orders : <span><?php
+        <div class="orderbox box">
+          <p><b>Placed on :</b> <span><?php echo $row['date_commande'] ?></span></p>
+          <p><b>Name : </b><span><?php echo $resultuser['prenom'] ?></span></p>
+          <p><b>Email :</b> <span><?php echo $resultuser['email'] ?></span></p>
+          <p><b>Address :</b> <span><?php echo $row['lieu'] ?></span></p>
+          <p><b>Your Orders :</b> <span><?php
                                         foreach($result2 as $row2 ){            
                                                     echo $row2['name'].'('.$row2['quantite'].') -';
                                                    $prix+=$row2['prix']*$row2['quantite'];
                                                 }
                                 ?></span></p>
-          <p>total price : <span><?php echo $prix.'$' ?></span></p>
-          <p>payment method : <span> master carte</span></p>
-          <p>payment status : <span>pending</span></p>
-          <button class="button" id="button">Save as PDF</button>
+          <p><b>total price : </b><span><?php echo $prix.'$' ?></span></p>
+          <p><b>payment method :</b> <span> Master Card</span></p>
+          <button class="button" id="pdfbutton">Save as PDF</button>
         </div>
         
 <?php endforeach; ?>
@@ -142,5 +141,10 @@ if(!isset($_SESSION['user_id'])){
       <img src="images/loader.gif" alt="" />
     </div>
     <script src="js/script.js"></script>
+    <script>
+      
+    </script>
+
+
   </body>
 </html>

@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600&display=swap');
 
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
+
+
+body{
+   background: #ffede7;
+}
 :root{
    --yellow:#fed330;
    --red:#e74c3c;
@@ -12,13 +18,14 @@
 
 
 *{
-   font-family: 'Rubik', sans-serif;
+   font-family: "Montserrat", sans-serif;
    margin:0; padding:0;
    box-sizing: border-box;
    outline: none; border:none;
    text-decoration: none;
    transition: .2s linear;
 }
+
 
 *::selection{
    background-color: var(--yellow);
@@ -131,7 +138,7 @@ section{
    top:0; left:0; right: 0;
    z-index: 1000;
    border-bottom: var(--border);
-   background-color: #f1af99; /*nav bar*/
+   background-color: #e67c58; /*nav bar*/
 }
 
 .header .flex{
@@ -259,6 +266,7 @@ section{
 
 .category .box-container .box{
    border:var(--border);
+  
    padding:2rem;
    text-align: center;
 }
@@ -293,6 +301,10 @@ section{
    gap:1.5rem;
    align-items: flex-start;
    justify-content: center;
+   
+}
+.products .box-container *{
+   border-radius: 20px;
 }
 
 .products .box-container .box{
@@ -662,6 +674,9 @@ section{
 
 .user-details .user p.address{
    margin-top: 2rem;
+   border:black;
+   border-radius:5px;
+   background: white;
 }
 
 .form-container form{
@@ -801,6 +816,8 @@ section{
 .orders .box-container .box{
    border:var(--border);
    padding:1rem 2rem;
+   border-radius: 20px;
+   background: #fff;
 }
 
 .orders .box-container .box p{
@@ -946,3 +963,40 @@ section{
    z-index:10;
 }
 
+#orderbox{
+   margin-top: 10px;
+   border-radius: 20px;
+   background: #fff;
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
+   gap:1.5rem;
+   align-items: flex-start;
+}
+
+#pdfbutton{
+   width: 20%;
+   margin-left: 40%;
+   background-color: #e24938;
+   border-radius: 10px;
+   color:#f8e1da
+}
+#pdfbutton:hover{
+   background-color: #f5825c;
+}
+
+.delete-btn{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.address{
+   background-color: #ffffff;
+   border-radius: 5px;
+}
+
+.textaddress{
+   font-size: 20px;
+   background: white;
+   border:black;
+
+}

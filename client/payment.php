@@ -34,11 +34,11 @@ $_SESSION['address']=$_POST['address'];
         <p>Total Price: $<span id="totalPrice"><?php echo $total ?></span></p>
         
         <form action = "confirmation.php"  method="post" >
-            <label for="creditCardNumber">Number of Credit Cards:</label>
-            <input type="text" id="creditCardNumber" name="creditCardNumber" min="1" placeholder="credit card number">
+            <label for="creditCardNumber">Number of Credit Card:</label>
+            <input type="text" id="creditCardNumber" name="creditCardNumber" min="1" placeholder="Number">
             <br>
             <label for="securityCode">Security Code:</label>
-            <input type="text" id="securityCode" name="securityCode" placeholder="credit card code">
+            <input type="text" id="securityCode" name="securityCode" placeholder="Code">
             <br>
             <button type="submit">Order</button>
         </form>

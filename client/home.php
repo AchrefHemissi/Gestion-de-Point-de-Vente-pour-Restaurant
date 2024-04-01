@@ -75,8 +75,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
         <div class="swiper-wrapper">
           <div class="swiper-slide slide">
             <div class="content">
-              <span>order online</span>
-              <h3>delicious pizza</h3>
+              <h3>Pizza</h3>
               <a href="menu.php" class="btn">see menus</a>
             </div>
             <div class="image">
@@ -86,8 +85,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
           <div class="swiper-slide slide">
             <div class="content">
-              <span>order online</span>
-              <h3>double hamburger</h3>
+              <h3>Hamburger</h3>
               <a href="menu.php" class="btn">see menus</a>
             </div>
             <div class="image">
@@ -97,12 +95,11 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
           <div class="swiper-slide slide">
             <div class="content">
-              <span>order online</span>
-              <h3>roasted chicken</h3>
+              <h3>Fried chicken</h3>
               <a href="menu.php" class="btn">see menus</a>
             </div>
             <div class="image">
-              <img src="images/home-img-3.png" alt="" />
+              <img src="images\fried.png" alt="" />
             </div>
           </div>
         </div>
@@ -112,27 +109,27 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
     </section>
 
     <section class="category">
-      <h1 class="title">food category</h1>
+      <h1 class="title">Food Category</h1>
 
       <div class="box-container">
         <a href="fast_food.php" class="box">
           <img src="images/cat-1.png" alt="" />
-          <h3>fast food</h3>
+          <h3>Fast Food</h3>
         </a>
 
         <a href="dishes.php" class="box">
           <img src="images/cat-2.png" alt="" />
-          <h3>main dishes</h3>
+          <h3>Main Dishes</h3>
         </a>
 
         <a href="drink.php " class="box">
           <img src="images/cat-3.png" alt="" />
-          <h3>drinks</h3>
+          <h3>Drinks</h3>
         </a>
 
         <a href="dessert.php" class="box">
           <img src="images/cat-4.png" alt="" />
-          <h3>desserts</h3>
+          <h3>Desserts</h3>
         </a>
       </div>
     </section>
