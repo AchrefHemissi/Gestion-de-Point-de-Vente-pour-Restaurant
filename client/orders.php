@@ -60,18 +60,19 @@ if(!isset($_SESSION['user_id'])){
   <body>
     <header class="header">
       <section class="flex">
-        <a href="home.html" class="logo"><b>GL-icious </b> 😋</a>
+        <a href="home.php" class="logo"><b>GL-icious </b> 😋</a>
 
         <nav class="navbar">
           <a href="home.php">home</a>
           <a href="about.php">about</a>
           <a href="menu.php">menu</a>
           <a href="orders.php">orders</a>
-          <a href="contact.html">contact</a>
+          <a href="contact.php">contact</a>
+    
         </nav>
 
         <div class="icons">
-          <a href="search.html"><i class="fas fa-search"></i></a>
+          <a href="search.php"><i class="fas fa-search"></i></a>
           <a href="cart.php"
             ><i class="fas fa-shopping-cart"></i><?php echo isset($_SESSION['cart']) ? '('.count($_SESSION['cart']).')' : 0; ?></a
           >
@@ -83,16 +84,16 @@ if(!isset($_SESSION['user_id'])){
          <p class="name"><?php echo $user['prenom'].' '.$user['nom']?></p>
          <div class="flex">
             <a href="profile.php" class="btn">profile</a>
-            <a href="#" class="delete-btn">logout</a>
+            <a href="logout.php" class="delete-btn">logout</a>
          </div>
-         <p class="account"><a href="../login/index.php">login</a> or <a href="register.html">register</a></p>
+      
       </div>
       </section>
     </header>
 
     <div class="heading">
       <h3>your orders</h3>
-      <p><a href="home.html">home </a> <span> / orders</span></p>
+      <p><a href="home.php">home </a> <span> / orders</span></p>
     </div>
 
     <section class="orders">
@@ -119,7 +120,7 @@ if(!isset($_SESSION['user_id'])){
           <p>placed on : <span><?php echo $row['date_commande'] ?></span></p>
           <p>name : <span><?php echo $resultuser['prenom'] ?></span></p>
           <p>email : <span><?php echo $resultuser['email'] ?></span></p>
-          <p>address : <span>jogeshwari, mumbai, india - 400103</span></p>
+          <p>address : <span><?php echo $row['lieu'] ?></span></p>
           <p>your orders : <span><?php
                                         foreach($result2 as $row2 ){            
                                                     echo $row2['name'].'('.$row2['quantite'].') -';
@@ -129,7 +130,9 @@ if(!isset($_SESSION['user_id'])){
           <p>total price : <span><?php echo $prix.'$' ?></span></p>
           <p>payment method : <span> master carte</span></p>
           <p>payment status : <span>pending</span></p>
+          <button class="button" id="button">Save as PDF</button>
         </div>
+        
 <?php endforeach; ?>
        
       </div>
@@ -138,7 +141,6 @@ if(!isset($_SESSION['user_id'])){
     <div class="loader">
       <img src="images/loader.gif" alt="" />
     </div>
-
     <script src="js/script.js"></script>
   </body>
 </html>
