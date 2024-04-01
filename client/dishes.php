@@ -42,6 +42,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
           <a href="about.php">about</a>
           <a href="menu.php">menu</a>
           <a href="orders.php">orders</a>
+          <a href="contact.php">contact</a>
     
         </nav>
 
@@ -87,10 +88,10 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
           <a href="dishes.php" class="cat">dishes</a>
           <div class="name">Spaghetti</div>
           <div class="flex">
-            <div class="price"><span>$</span>4.5<span>/-</span></div>
+            <div class="price"><span>$</span>4.5</div>
             <input hidden name="id" value = "2">
             <input hidden name="name" value = "Spaghetti">
-            <input hidden name="price" value = "4.5">
+            <input hidden name="price" value = "4.5" class="unit-price">
             <input hidden name="imglink" value = "images/spaghetti.jpg">
 
             <input
@@ -103,6 +104,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
               onkeypress="if(this.value.length == 2) return false;"
             />
           </div>
+          <div class="sub-total">total : $ <span>4.5</span></div>
         </form>
 
        
@@ -121,10 +123,10 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
           <a href="dishes.php" class="cat">dishes</a>
           <div class="name">Chawarma</div>
           <div class="flex">
-            <div class="price"><span>$</span>14<span>/-</span></div>
+            <div class="price"><span>$</span>14</div>
             <input hidden name="id" value = "6">
             <input hidden name="name" value = "Chawarma">
-            <input hidden name="price" value = "14">
+            <input hidden name="price" value = "14" class="unit-price">
             <input hidden name="imglink" value = "images/chawarma.avif">
             <input
               type="number"
@@ -136,6 +138,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
               onkeypress="if(this.value.length == 2) return false;"
             />
           </div>
+          <div class="sub-total">total : $ <span>14</span></div>
         </form>
 
         
@@ -152,5 +155,6 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
     </div>
 
     <script src="js/script.js"></script>
+    <script src="js/total_price.js"></script>
   </body>
 </html>

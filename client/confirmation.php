@@ -25,6 +25,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 if ($result) {
                     // Credit card information is correct
+                    //check if the montant is enough
+                    if($result['montant'] < $_SESSION['total']) {
+                        $_SESSION['payment_message'] = "Insufficient funds.";
+                        header("Location: payment.php");
+                        exit();
+                    }
+
                     // Proceed with placing the order
 
                     // Get total number of orders
@@ -60,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $stmtq->execute([$_SESSION['total'], $creditCardNumber]);
 
                     // Success message
-                    echo "Payment successful.";
+                    echo "<p>Payment successful.</p>";
                 } else {
                     // Credit card information is incorrect
                     $_SESSION['payment_message'] = "Invalid credit card information.";
@@ -103,6 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Confirmation</title>
+    <link rel="stylesheet" href="css/style2.css">
 </head>
 <body>
     <?php if (isset($orderSql)) { 
@@ -114,5 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <p>Order placed successfully.</p>
         <button onclick="location.href='home.php'">Return to Home</button>
     <?php } ?>
+   
+
 </body>
 </html>

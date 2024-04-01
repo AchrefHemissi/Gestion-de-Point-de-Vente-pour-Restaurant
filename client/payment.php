@@ -42,6 +42,8 @@ $_SESSION['address']=$_POST['address'];
             <br>
             <button type="submit">Order</button>
         </form>
+        <br>
+        <button onclick="location.href='cart.php'">Return to cart</button>
         <?php
         if (isset($_SESSION['payment_message'])) {
             echo '<p color="red">' . $_SESSION['payment_message'] . '</p>';
@@ -49,6 +51,7 @@ $_SESSION['address']=$_POST['address'];
         }
         ?>
     </div>
+
 
     
 </body>

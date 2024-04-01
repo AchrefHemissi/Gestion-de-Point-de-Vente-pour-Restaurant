@@ -209,13 +209,7 @@ $_SESSION['total'] = $total;
 </section>
 
 
-<footer class="footer">
 
-   
-
-   <div class="credit"></div>
-
-</footer>
 
 <div class="loader">
    <img src="images/loader.gif" alt="">
