@@ -42,7 +42,6 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
           <a href="about.php">about</a>
           <a href="menu.php">menu</a>
           <a href="orders.php">orders</a>
-          <a href="contact.php">contact</a>
     
         </nav>
 
@@ -67,12 +66,12 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
     </header>
 
     <div class="heading">
-      <h3>our menu</h3>
-      <p><a href="home.php">home </a> <span> / menu</span></p>
+      <h3>our fast food</h3>
+      <p><a href="home.php">home </a> <span> / category</span></p>
     </div>
 
     <section class="products">
-      <h1 class="title">latest dishes</h1>
+      <h1 class="title">fast food</h1>
 
       <div class="box-container">
         <form action = "cart.php"  method="post" class="box">
@@ -103,37 +102,10 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
           </div>
         </form>
 
-        <form action = "cart.php" accept="" method="post" class="box">
-          
-          <button
-            class="fas fa-shopping-cart"
-            type="submit"
-            name="add_to_cart"
-          ></button>
-          <img src="images/spaghetti.jpg" />
-          <a href="dishes.php" class="cat">dishes</a>
-          <div class="name">Spaghetti</div>
-          <div class="flex">
-            <div class="price"><span>$</span>4.5<span>/-</span></div>
-            <input hidden name="id" value = "2">
-            <input hidden name="name" value = "Spaghetti">
-            <input hidden name="price" value = "4.5">
-            <input hidden name="imglink" value = "images/spaghetti.jpg">
-
-            <input
-              type="number"
-              name="qty"
-              class="qty"
-              min="1"
-              max="99"
-              value="1"
-              onkeypress="if(this.value.length == 2) return false;"
-            />
-          </div>
-        </form>
+        
 
         <form action = "cart.php" accept="" method="post" class="box">
-         
+       
           <button
             class="fas fa-shopping-cart"
             type="submit"
@@ -160,92 +132,14 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
           </div>
         </form>
 
-        <form action = "cart.php" accept="" method="post" class="box">
-        
-          <button
-            class="fas fa-shopping-cart"
-            type="submit"
-            name="add_to_cart"
-          ></button>
-          <img src="images/cheesecake.jpg" alt="" />
-          <a href="dessert.php" class="cat">dessert</a>
-          <div class="name">Cheese Cake </div>
-          <div class="flex">
-            <div class="price"><span>$</span>5<span>/-</span></div>
-            <input hidden name="id" value = "4">
-            <input hidden name="name" value = "Cheese Cake">
-            <input hidden name="price" value = "5">
-            <input hidden name="imglink" value = "images/cheesecake.jpg">
-            <input
-              type="number"
-              name="qty"
-              class="qty"
-              min="1"
-              max="99"
-              value="1"
-              onkeypress="if(this.value.length == 2) return false;"
-            />
-          </div>
-        </form>
+       
+
+       
+
+       
 
         <form action = "cart.php" accept="" method="post" class="box">
-        
-          <button
-            class="fas fa-shopping-cart"
-            type="submit"
-            name="add_to_cart"
-          ></button>
-          <img src="uploaded_img/drink-1.png" alt="" />
-          <a href="drink.php" class="cat">drinks</a>
-          <div class="name">Orange Juice</div>
-          <div class="flex">
-            <div class="price"><span>$</span>7<span>/-</span></div>
-            <input hidden name="id" value = "5">
-            <input hidden name="name" value = "Orange Juice">
-            <input hidden name="price" value = "7">
-            <input hidden name="imglink" value = "uploaded_img/drink-1.png">
-            <input
-              type="number"
-              name="qty"
-              class="qty"
-              min="1"
-              max="99"
-              value="1"
-              onkeypress="if(this.value.length == 2) return false;"
-            />
-          </div>
-        </form>
-
-        <form action = "cart.php" accept="" method="post" class="box">
-         
-          <button
-            class="fas fa-shopping-cart"
-            type="submit"
-            name="add_to_cart"
-          ></button>
-          <img src="images/chawarma.avif" alt="" />
-          <a href="dishes.php" class="cat">dishes</a>
-          <div class="name">Chawarma</div>
-          <div class="flex">
-            <div class="price"><span>$</span>14<span>/-</span></div>
-            <input hidden name="id" value = "6">
-            <input hidden name="name" value = "Chawarma">
-            <input hidden name="price" value = "14">
-            <input hidden name="imglink" value = "images/chawarma.avif">
-            <input
-              type="number"
-              name="qty"
-              class="qty"
-              min="1"
-              max="99"
-              value="1"
-              onkeypress="if(this.value.length == 2) return false;"
-            />
-          </div>
-        </form>
-
-        <form action = "cart.php" accept="" method="post" class="box">
-         
+          
           <button
             class="fas fa-shopping-cart"
             type="submit"
@@ -273,7 +167,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
         </form>
 
         <form action = "cart.php" accept="" method="post" class="box">
-          
+         
           <button
             class="fas fa-shopping-cart"
             type="submit"
@@ -300,64 +194,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
           </div>
         </form>
 
-        <form action = "cart.php" accept="" method="post" class="box">
-          
-          <button
-            class="fas fa-shopping-cart"
-            type="submit"
-            name="add_to_cart"
-          ></button>
-          <img src="images/mojito.avif" alt="" />
-          <a href="drink.php" class="cat">drinks</a>
-          <div class="name">Mojito </div>
-          <div class="flex">
-            <div class="price"><span>$</span>7<span>/-</span></div>
-            <input hidden name="id" value = "9">
-            <input hidden name="name" value = "Mojito">
-            <input hidden name="price" value = "7">
-            <input hidden name="imglink" value = "images/mojito.avif">
-            <input
-              type="number"
-              name="qty"
-              class="qty"
-              min="1"
-              max="99"
-              value="1"
-              onkeypress="if(this.value.length == 2) return false;"
-            />
-          </div>
-        </form>
-
-
-        <form action = "cart.php" accept="" method="post" class="box">
-         
-          <button
-            class="fas fa-shopping-cart"
-            type="submit"
-            name="add_to_cart"
-          ></button>
-          <img src="uploaded_img/dessert-2.png" alt="" />
-          <a href="dessert.php" class="cat">dessert</a>
-          <div class="name">Tiramisu</div>
-          <div class="flex">
-            <div class="price"><span>$</span>10<span>/-</span></div>
-            <input hidden name="id" value = "10">
-            <input hidden name="name" value = "Tiramisu">
-            <input hidden name="price" value = "10">
-            <input hidden name="imglink" value = "uploaded_img/dessert-2.png">
-            <input
-              type="number"
-              name="qty"
-              class="qty"
-              min="1"
-              max="99"
-              value="1"
-              onkeypress="if(this.value.length == 2) return false;"
-            />
-          </div>
-        </form>
-      </div>
-    </section>
+        
 
     <div class="loader">
       <img src="images/loader.gif" alt="" />

@@ -4,12 +4,18 @@ if(!isset($_SESSION['user_id'])){
   header("Location: ../login/index.php");
   exit;
 }
+if(!isset($_POST['search_box'])){
+    header("Location: search.php");
+    exit;
+}
 require_once 'connexionBD.php';
 $conn = ConnexionBD::getInstance();
 $query = "SELECT * FROM utilisateur WHERE id = ?";
 $stmt = $conn->prepare($query);
 $stmt->execute([$_SESSION['user_id']]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
 
 
 
@@ -67,15 +73,15 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
     </header>
 
     <div class="heading">
-      <h3>our menu</h3>
+      <h3>Result</h3>
       <p><a href="home.php">home </a> <span> / menu</span></p>
     </div>
 
     <section class="products">
-      <h1 class="title">latest dishes</h1>
+      <h1 class="title"></h1>
 
       <div class="box-container">
-        <form action = "cart.php"  method="post" class="box">
+        <form action = "cart.php"  method="post" class="box" id="pizza" hidden>
           
           <button
             class="fas fa-shopping-cart"
@@ -103,7 +109,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
           </div>
         </form>
 
-        <form action = "cart.php" accept="" method="post" class="box">
+        <form action = "cart.php" accept="" method="post" class="box" id="spaghetti" hidden>
           
           <button
             class="fas fa-shopping-cart"
@@ -132,7 +138,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
           </div>
         </form>
 
-        <form action = "cart.php" accept="" method="post" class="box">
+        <form action = "cart.php" accept="" method="post" class="box" id="hamburger" hidden>
          
           <button
             class="fas fa-shopping-cart"
@@ -160,7 +166,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
           </div>
         </form>
 
-        <form action = "cart.php" accept="" method="post" class="box">
+        <form action = "cart.php" accept="" method="post" class="box" id="cheesecake" hidden>
         
           <button
             class="fas fa-shopping-cart"
@@ -188,7 +194,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
           </div>
         </form>
 
-        <form action = "cart.php" accept="" method="post" class="box">
+        <form action = "cart.php" accept="" method="post" class="box" id="orange_juice" hidden>
         
           <button
             class="fas fa-shopping-cart"
@@ -216,7 +222,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
           </div>
         </form>
 
-        <form action = "cart.php" accept="" method="post" class="box">
+        <form action = "cart.php" accept="" method="post" class="box" id="chawarma" hidden>
          
           <button
             class="fas fa-shopping-cart"
@@ -244,7 +250,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
           </div>
         </form>
 
-        <form action = "cart.php" accept="" method="post" class="box">
+        <form action = "cart.php" accept="" method="post" class="box" id="fries" hidden>
          
           <button
             class="fas fa-shopping-cart"
@@ -272,7 +278,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
           </div>
         </form>
 
-        <form action = "cart.php" accept="" method="post" class="box">
+        <form action = "cart.php" accept="" method="post" class="box" id="fried_chicken" hidden>
           
           <button
             class="fas fa-shopping-cart"
@@ -300,7 +306,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
           </div>
         </form>
 
-        <form action = "cart.php" accept="" method="post" class="box">
+        <form action = "cart.php" accept="" method="post" class="box" id="mojito" hidden>
           
           <button
             class="fas fa-shopping-cart"
@@ -329,7 +335,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
         </form>
 
 
-        <form action = "cart.php" accept="" method="post" class="box">
+        <form action = "cart.php" accept="" method="post" class="box" id="tiramisu" hidden>
          
           <button
             class="fas fa-shopping-cart"
@@ -358,6 +364,12 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
         </form>
       </div>
     </section>
+    <script>
+        const ele = document.querySelector("#<?php echo strtolower(str_replace(' ','_',$_POST['search_box']))?>");
+        ele.style.display = "block";
+        
+
+    </script>
 
     <div class="loader">
       <img src="images/loader.gif" alt="" />

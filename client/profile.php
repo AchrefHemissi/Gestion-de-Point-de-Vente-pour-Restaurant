@@ -37,18 +37,18 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
    <section class="flex">
 
-      <a href="home.html" class="logo"><b>GL-icious </b> 😋</a>
+      <a href="home.php" class="logo"><b>GL-icious </b> 😋</a>
 
       <nav class="navbar">
          <a href="home.php">home</a>
          <a href="about.php">about</a>
          <a href="menu.php">menu</a>
          <a href="orders.php">orders</a>
-         <a href="contact.html">contact</a>
+         <a href="contact.php">contact</a>
       </nav>
 
       <div class="icons">
-         <a href="search.html"><i class="fas fa-search"></i></a>
+         <a href="search.php"><i class="fas fa-search"></i></a>
          <a href="cart.php"><i class="fas fa-shopping-cart"></i><span><?php echo isset($_SESSION['cart']) ? '('.count($_SESSION['cart']).')' : 0; ?></span></a>
          <div id="user-btn" class="fas fa-user"></div>
          <div id="menu-btn" class="fas fa-bars"></div>
