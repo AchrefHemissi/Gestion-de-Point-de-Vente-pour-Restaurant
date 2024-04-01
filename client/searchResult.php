@@ -364,9 +364,17 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
         </form>
       </div>
     </section>
+    
     <script>
         const ele = document.querySelector("#<?php echo strtolower(str_replace(' ','_',$_POST['search_box']))?>");
-        ele.style.display = "block";
+        
+        if(!ele){
+          document.querySelector("section.products").innerHTML = "<p class=\"erreur\">No result found for <?php echo $_POST['search_box']?></p>";
+
+          
+        }else{
+          ele.style.display = "block";
+        }
         
 
     </script>

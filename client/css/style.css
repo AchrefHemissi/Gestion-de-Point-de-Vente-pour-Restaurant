@@ -9,6 +9,8 @@
    --border:.2rem solid var(--black);
 }
 
+
+
 *{
    font-family: 'Rubik', sans-serif;
    margin:0; padding:0;
@@ -21,6 +23,12 @@
 *::selection{
    background-color: var(--yellow);
    color:var(--black);
+}
+
+.erreur {
+   color: red;
+   font-size: 35px;
+   text-align: center;
 }
 
 html{
