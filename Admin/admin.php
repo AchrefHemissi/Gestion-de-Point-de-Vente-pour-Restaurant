@@ -101,7 +101,7 @@ require_once 'connexionAdminDB.php';
       if (!$con) {
         die("Connection failed: " . mysqli_connect_error());
       };
-      $sql = "SELECT * FROM utilisateur";
+      $sql = "SELECT * FROM utilisateur where is_admin=0";
       $result = mysqli_query($con, $sql);
 
       while ($row = mysqli_fetch_assoc($result)) {
