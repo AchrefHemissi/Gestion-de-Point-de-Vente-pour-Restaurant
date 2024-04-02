@@ -84,7 +84,9 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
          <div class="content">
             <h3>why choose us?</h3>
-            <p>Indulge in our restaurant's unique fusion of flavors, crafted with locally-sourced ingredients, and experience unparalleled dining satisfaction</p>
+            <p>Easy Online Ordering: Our user-friendly website makes ordering your favorite dishes quick and effortless. With just a few clicks, you can browse our menu, customize your order, and have it delivered straight to your doorstep.</br>
+               24/7 Accessibility: Craving your favorite dish late at night? No problem! Our website is available 24/7, so you can place an order whenever hunger strikes, day or night.
+            </p>
             <a href="menu.php" class="btn">our menu</a>
          </div>
 
@@ -93,9 +95,6 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
    </section>
 
    <section class="steps">
-
-      <h1 class="title">3 simple steps</h1>
-
       <div class="box-container">
 
          <div class="box">
@@ -105,14 +104,9 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
          </div>
 
          <div class="box">
-            <img src="images/step-2.png" alt="">
-            <h3>30 minutes delivery</h3>
-            <p>Get your order in just 30 minutes - fast, reliable delivery guaranteed!</p>
-         </div>
-
-         <div class="box">
             <img src="images/step-3.png" alt="">
-            <h3>enjoy food!</h3>
+            <h3>Enjoy Your Meal!</h3>
+            <p>Good Food Is Good Mood</p>
          </div>
 
       </div>
@@ -130,8 +124,8 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
          <div class="box">
             <img src="images/clock-icon.png" alt="">
-            <h3>Opening Hours</h3>
-            <p>09:00 to 20:00 </p>
+            <h3>Open</h3>
+            <p>24/7</p>
          </div>
 
          <div class="box">

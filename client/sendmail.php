@@ -1,16 +1,51 @@
+
 <?php
 
-if (isset($_POST['name'], $_POST['email'], $_POST['msg'])) {
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $msg = $_POST['msg'];
-    $to = "meddhia310@gmail.com";
-    $subject = "Feedback";
-    $headers = "From: $email";
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-    if (mail($to, $subject, $msg, $headers)) {
-        echo "Thanks for contacting us";
-    } else {
-        echo "Mail not sent";
-    }
+require '../phpmailer/phpmailer/src/Exception.php';
+require '../phpmailer/phpmailer/src/PHPMailer.php';
+require '../phpmailer/phpmailer/src/SMTP.php';
+
+// Retrieve form data
+$email = $_POST['email'];
+$msg = $_POST['msg'];
+$to = "gl.icious.team@gmail.com";
+$subject = "Feedback From: $email";
+
+
+// Initialize PHPMailer
+$mail = new PHPMailer(true);
+
+try {
+    // Set mailer to use SMTP
+    $mail->isSMTP();
+
+    //Gmail SMTP server settings
+    $mail->Host = 'smtp.gmail.com';
+    $mail->SMTPAuth = true; // Enable SMTP authentication
+    $mail->Username = 'gl.icious.team@gmail.com'; // Your Gmail address
+    $mail->Password = 'tqwx izad vaya pqze'; // Your Gmail password
+    $mail->Port = 587; // TCP port to connect to
+
+    // Sender and recipient
+    $mail->setFrom('gl.icious.team@gmail.com', 'gl-icious');
+    $mail->addAddress($to);
+
+    // Email content
+    $mail->isHTML(true); // Set email format to HTML
+    $mail->Subject = $subject;
+    $mail->Body = $msg;
+
+    // Send email
+    $mail->send();
+    echo 'Email sent successfully ce lien expire automatiquement après 5 secondes.';
+} catch (Exception $e) {
+    echo "Error: {$mail->ErrorInfo}" + " ce lien expire automatiquement après 5 secondes.";
 }
+echo "<script>
+setTimeout(function(){
+    window.location.href = 'contact.php';
+}, 5000);
+</script>";

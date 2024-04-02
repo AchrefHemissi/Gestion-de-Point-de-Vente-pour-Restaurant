@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $query = "INSERT INTO utilisateur(id, nom, prenom, email, pass, etat, is_admin, num_tel) VALUES (?, ?, ?, ?, ?, 0, 0, ?)";
 
         $stmt = $con->prepare($query);
-        $stmt->bind_param("issssi", $newId, $fname, $lname, $email, $hashedPassword, $phone); //"issssi" specifies the types of the variables that will be bound: i corresponds to an integer and s corresponds to a string
+        $stmt->bind_param("issssi", $newId, $lname, $fname, $email, $hashedPassword, $phone); //"issssi" specifies the types of the variables that will be bound: i corresponds to an integer and s corresponds to a string
         if ($stmt->execute()) {
           $message = '<div class="message-success">User added successfully </div>';
         } else {

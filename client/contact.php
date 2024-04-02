@@ -77,7 +77,6 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
          <form action="sendmail.php" method="post">
             <h3>tell us something!</h3>
-            <input type="text" name="name" required placeholder="enter your name" maxlength="50" class="box" id="name">
             <input type="email" name="email" required placeholder="enter your email" maxlength="50" class="box" id="email">
             <textarea name="msg" placeholder="enter your message" required class="box" cols="30" rows="10" maxlength="500" id="msg"></textarea>
             <input type="submit" value="send message" class="btn" name="send">

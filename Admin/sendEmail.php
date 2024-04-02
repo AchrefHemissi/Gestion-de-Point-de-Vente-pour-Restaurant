@@ -3,9 +3,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'phpmailer/phpmailer/src/Exception.php';
-require 'phpmailer/phpmailer/src/PHPMailer.php';
-require 'phpmailer/phpmailer/src/SMTP.php';
+require '../phpmailer/phpmailer/src/Exception.php';
+require '../phpmailer/phpmailer/src/PHPMailer.php';
+require '../phpmailer/phpmailer/src/SMTP.php';
 
 // Retrieve form data
 $to = $_POST['recipient'];
@@ -19,7 +19,7 @@ try {
     // Set mailer to use SMTP
     $mail->isSMTP();
 
-    // Brēvo SMTP server settings
+    // gmail SMTP server settings
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true; // Enable SMTP authentication
     $mail->Username = 'gl.icious.team@gmail.com'; // Your Gmail address
@@ -37,12 +37,12 @@ try {
 
     // Send email
     $mail->send();
-    echo 'Email sent successfully ce lien expire automatiquement après 3 secondes.';
+    echo 'Email sent successfully ce lien expire automatiquement après 5 secondes.';
 } catch (Exception $e) {
-    echo "Error: {$mail->ErrorInfo}" + " ce lien expire automatiquement après 3 secondes.";
+    echo "Error: {$mail->ErrorInfo}" + " ce lien expire automatiquement après 5 secondes.";
 }
 echo "<script>
 setTimeout(function(){
     window.location.href = 'admin.php';
-}, 3000);
+}, 5000);
 </script>";
