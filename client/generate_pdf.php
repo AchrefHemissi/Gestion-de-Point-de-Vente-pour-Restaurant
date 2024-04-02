@@ -1,8 +1,9 @@
 <?php
-// You need the full path to the autoload.php file in order for this to work!
-require_once "vendor/autoload.php";
 
 use Dompdf\Dompdf;
+
+// You need the full path to the autoload.php file in order for this to work!
+require_once "../vendor/autoload.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $html = $_POST['html'];
@@ -18,4 +19,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     echo 'order.pdf';
 }
-
