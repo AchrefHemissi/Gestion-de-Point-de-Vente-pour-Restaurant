@@ -161,7 +161,7 @@ require_once 'connexionAdminDB.php';
             chart = new Chart(ctx, {
               type: 'bar',
               data: {
-                labels: ["Pizza", "Spaghetti", "Tiramisu", "Cheese Cake", "Hamburger", "Chawarma", "Fried Chicken", "Fries", "Orange Juice", "Detox"],
+                labels: ["Pizza", "Spaghetti", "Hamburger", "Cheese Cake", "Orange Juice", "Chawarma", "Fries", "Fried Chicken", "Mojito", "Tiramisu"],
                 datasets: [{
                   label: 'Chart',
                   data: data,
