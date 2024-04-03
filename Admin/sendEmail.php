@@ -3,9 +3,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require '../phpmailer/phpmailer/src/Exception.php';
-require '../phpmailer/phpmailer/src/PHPMailer.php';
-require '../phpmailer/phpmailer/src/SMTP.php';
+require '../phpmailer/src/Exception.php';
+require '../phpmailer/src/PHPMailer.php';
+require '../phpmailer/src/SMTP.php';
 
 // Retrieve form data
 $to = $_POST['recipient'];
