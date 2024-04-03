@@ -33,7 +33,7 @@ Voici les points clés du projet :
    - Nous avons organisé des fichiers PHP indépendants pour chaque fonctionnalité afin d'améliorer la structure du code.
 
 Hébergement du Site :
-   - Le site a été hébergé sur gl-icious.infinityfreeapp.com.
+   - Le site a été hébergé sur https://www.gl-icious.infinityfreeapp.com .
    - Veuillez noter  que la fonction de génération de PDF ne fonctionne correctement en ligne en raison de notre hébergeur (InfinityFree).
 
 Téléchargement des Fichiers :
