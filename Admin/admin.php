@@ -270,10 +270,6 @@ require_once 'connexionAdminDB.php';
           fetch('update_order.php', {
               method: 'POST',
               body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-
             });
 
           orderDiv.style.display = 'none';
