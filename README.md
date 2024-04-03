@@ -1,6 +1,7 @@
 Ce projet consiste en un système de gestion de point de vente conçu pour un restaurant. Il offre une plateforme
 web permettant aux restaurateurs de gérer efficacement leurs opérations quotidiennes, du suivi des
 commandes à la gestion des clients.
+
 Fonctionnalités principales :
 
 - Authentification et Inscription : Permet aux utilisateurs de s'inscrire et de se connecter de manière
