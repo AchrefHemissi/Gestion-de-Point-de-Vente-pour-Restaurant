@@ -22,12 +22,12 @@ try {
     // gmail SMTP server settings
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true; // Enable SMTP authentication
-    $mail->Username = 'Sender Gmail address'; 
-    $mail->Password = 'Sender Gmail password'; 
+    $mail->Username =  'the gmail of the company'; 
+    $mail->Password = 'the password of the gmail'; 
     $mail->Port = 587; // TCP port to connect to
 
     // Sender and recipient
-    $mail->setFrom('Sender Gmail address', 'the name of the company');
+    $mail->setFrom('the gmail of the company', 'the name of the company');
     $mail->addAddress($to);
 
     // Email content
