@@ -20,7 +20,8 @@ personnalisée.
 - Communication par E-mail : Facilite la communication entre le client et l'administrateur par e-mail.
 
 Voici les points clés du projet :
- -Génération de PDF des Commandes : La génération des PDF des commandes passées par les clients est réalisée en PHP en utilisant la bibliothèque DOMPDF.
+
+-Génération de PDF des Commandes : La génération des PDF des commandes passées par les clients est réalisée en PHP en utilisant la bibliothèque DOMPDF.
 
 -Fonctionnalité de Mail : 
    -De l'administrateur au client : La configuration du mail a été simplifiée en utilisant l'adresse e-mail gl.icious.team@gmail.com.
@@ -39,3 +40,11 @@ Téléchargement des Fichiers :
 Pour assurer le bon fonctionnement du mailing et de la génération de PDF, veuillez télécharger les dossiers à partir du lien suivant (si vous avez des problèmes à installer phpmailer et DOMPDF vous même) et assurez-vous qu'ils sont présents dans le répertoire du projet(avec les dossiers admin, client, login) .
 
 https://drive.google.com/drive/folders/1N1yO7qOEPOBPj5e612ON8FuSliargdPg
+
+voici un vidéo explicatif du configuration du mail avant de faire les étapes qui suivent :
+https://www.youtube.com/watch?v=sKJ_Mzc7hM8&ab_channel=Mailmeteor
+
+Dans les fichiers sendEmail.php dans les dossiers Client et Admin
+N'oubliez de remplacez 
+"Gmail of the company " par votre gmail
+"the password of the Gmail" par l'un des app passwords (générés par votre gmail )
