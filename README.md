@@ -45,6 +45,6 @@ voici un vidéo explicatif du configuration du mail avant de faire les étapes q
 https://www.youtube.com/watch?v=sKJ_Mzc7hM8&ab_channel=Mailmeteor
 
 Dans les fichiers sendEmail.php dans les dossiers Client et Admin
-N'oubliez de remplacez 
+N'oubliez pas de remplacez 
 "Gmail of the company " par votre gmail
 "the password of the Gmail" par l'un des app passwords (générés par votre gmail )
