@@ -40,4 +40,3 @@ Téléchargement des Fichiers :
 Pour assurer le bon fonctionnement du mailing et de la génération de PDF, veuillez télécharger les dossiers à partir du lien suivant (si vous avez des problèmes à installer phpmailer et DOMPDF vous même) et assurez-vous qu'ils sont présents dans le répertoire du projet(avec les dossiers admin, client, login) .
 
 https://drive.google.com/drive/folders/1N1yO7qOEPOBPj5e612ON8FuSliargdPg
-Gl-icious
