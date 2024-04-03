@@ -25,12 +25,12 @@ try {
     //Gmail SMTP server settings
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true; // Enable SMTP authentication
-    $mail->Username = 'gl.icious.team@gmail.com'; // Your Gmail address
-    $mail->Password = 'tqwx izad vaya pqze'; // Your Gmail password
+    $mail->Username = 'the gmail of the company'; 
+    $mail->Password = 'the password of the gmail'; 
     $mail->Port = 587; // TCP port to connect to
 
     // Sender and recipient
-    $mail->setFrom('gl.icious.team@gmail.com', 'gl-icious');
+    $mail->setFrom('the gmail of the company', 'the name of the company');
     $mail->addAddress($to);
 
     // Email content
