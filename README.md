@@ -1,6 +1,5 @@
-Ce projet consiste en un système de gestion de point de vente conçu pour un restaurant. Il offre une plateforme
-web permettant aux restaurateurs de gérer efficacement leurs opérations quotidiennes, du suivi des
-commandes à la gestion des clients.
+Le projet vise à fournir un système complet de gestion de point de vente pour un restaurant, avec des fonctionnalités distinctes pour les utilisateurs clients et les administrateurs. 
+Il est composé essentiellement d'un bloc Login, Client, Admin(email:admin@gmail.com, password : admin) 
 
 Fonctionnalités principales :
 
@@ -19,3 +18,25 @@ bancaire, vérifiées par une base de données sécurisée.
 - Historique d'Achats : Suivi des achats précédents pour chaque client, offrant une expérience
 personnalisée.
 - Communication par E-mail : Facilite la communication entre le client et l'administrateur par e-mail.
+
+Voici les points clés du projet :
+-Génération de PDF des Commandes : La génération des PDF des commandes passées par les clients est réalisée en PHP en utilisant la bibliothèque DOMPDF.
+
+-Fonctionnalité de Mail : 
+   -De l'administrateur au client : La configuration du mail a été simplifiée en utilisant l'adresse e-mail gl.icious.team@gmail.com.
+   - Du client à l'administrateur : En raison de la complexité de la configuration des e-mails pour chaque client, nous avons opté pour l'envoi des e-mails par gl.icious.team@gmail.com à lui-même, en mentionnant l'adresse e-mail de l'émetteur dans le message.
+
+-Page d'Administration :
+   - Les requêtes AJAX avec la fonction fetch() de JavaScript ont été utilisées pour la page d'administration (même pour le client) .
+   - La fonction setInterval a été employée pour mettre à jour les données et statistiques (état des commandes, charte graphique, nombre de clients) sans actualiser la page.
+   - Nous avons organisé des fichiers PHP indépendants pour chaque fonctionnalité afin d'améliorer la structure du code.
+
+Hébergement du Site :
+   - Le site a été hébergé sur gl-icious.infinityfreeapp.com.
+   - Veuillez noter  que la fonction de génération de PDF ne fonctionne correctement en ligne en raison de notre hébergeur (InfinityFree).
+
+Téléchargement des Fichiers :
+Pour assurer le bon fonctionnement du mailing et de la génération de PDF, veuillez télécharger les dossiers à partir du lien suivant (si vous avez des problèmes à installer phpmailer et DOMPDF vous même) et assurez-vous qu'ils sont présents dans le répertoire du projet(avec les dossiers admin, client, login) .
+
+https://drive.google.com/drive/folders/1N1yO7qOEPOBPj5e612ON8FuSliargdPg
+Gl-icious
