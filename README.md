@@ -20,6 +20,7 @@ personnalisée.
 - Communication par E-mail : Facilite la communication entre le client et l'administrateur par e-mail.
 
 Voici les points clés du projet :
+
 -Génération de PDF des Commandes : La génération des PDF des commandes passées par les clients est réalisée en PHP en utilisant la bibliothèque DOMPDF.
 
 -Fonctionnalité de Mail : 
