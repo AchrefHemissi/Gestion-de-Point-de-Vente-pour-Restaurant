@@ -1,6 +1,9 @@
 Le projet vise à fournir un système complet de gestion de point de vente pour un restaurant, avec des fonctionnalités distinctes pour les utilisateurs clients et les administrateurs. 
 Il est composé essentiellement d'un bloc Login, Client, Admin(email:admin@gmail.com, password : admin) 
 
+Carte bancaire pour passer commande: Numéro de carte : 100100100
+Code:123
+
 Fonctionnalités principales :
 
 - Authentification et Inscription : Permet aux utilisateurs de s'inscrire et de se connecter de manière
