@@ -1,7 +1,5 @@
 # Gestion de Point de Vente pour Restaurant
 
-## Aperçu :
-
 Le projet vise à fournir un système complet de gestion de point de vente pour un restaurant, avec des fonctionnalités distinctes pour les utilisateurs clients et les administrateurs. Il est composé essentiellement d'un bloc Login, Client, Admin (email: admin@gmail.com, password : `admin`).
 
 ### Carte bancaire pour passer commande:
