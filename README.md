@@ -1,10 +1,12 @@
 # Gestion de Point de Vente pour Restaurant
 
-Le projet vise à fournir un système complet de gestion de point de vente pour un restaurant, avec des fonctionnalités distinctes pour les utilisateurs clients et les administrateurs. Il est composé essentiellement d'un bloc Login, Client, Admin (email: admin@gmail.com, password : admin).
+## Aperçu :
+
+Le projet vise à fournir un système complet de gestion de point de vente pour un restaurant, avec des fonctionnalités distinctes pour les utilisateurs clients et les administrateurs. Il est composé essentiellement d'un bloc Login, Client, Admin (email: admin@gmail.com, password : `admin`).
 
 ### Carte bancaire pour passer commande:
-- **Numéro de carte:** 100100100
-- **Code:** 123
+- **Numéro de carte:** `100100100`
+- **Code:** `123`
 
 ### Fonctionnalités Principales :
 
@@ -25,8 +27,8 @@ Le projet vise à fournir un système complet de gestion de point de vente pour 
    - De l'administrateur au client : La configuration du mail a été simplifiée en utilisant l'adresse e-mail gl.icious.team@gmail.com.
    - Du client à l'administrateur : En raison de la complexité de la configuration des e-mails pour chaque client, nous avons opté pour l'envoi des e-mails par gl.icious.team@gmail.com à lui-même, en mentionnant l'adresse e-mail de l'émetteur dans le message.
 - **Page d'Administration :**
-   - Les requêtes AJAX avec la fonction fetch() de JavaScript ont été utilisées pour la page d'administration (même pour le client).
-   - La fonction setInterval a été employée pour mettre à jour les données et statistiques (état des commandes, charte graphique, nombre de clients) sans actualiser la page.
+   - Les requêtes AJAX avec la fonction `fetch()` de JavaScript ont été utilisées pour la page d'administration (même pour le client).
+   - La fonction `setInterval()` a été employée pour mettre à jour les données et statistiques (état des commandes, charte graphique, nombre de clients) sans actualiser la page.
    - Nous avons organisé des fichiers PHP indépendants pour chaque fonctionnalité afin d'améliorer la structure du code.
 
 ### Hébergement du Site :
