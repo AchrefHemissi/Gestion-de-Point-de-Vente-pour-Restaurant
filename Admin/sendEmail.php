@@ -39,7 +39,7 @@ try {
     $mail->send();
     echo 'Email sent successfully ce lien expire automatiquement après 5 secondes.';
 } catch (Exception $e) {
-    echo "Error: {$mail->ErrorInfo}" + " ce lien expire automatiquement après 5 secondes.";
+    echo "Error: {$mail->ErrorInfo}" ;
 }
 echo "<script>
 setTimeout(function(){
