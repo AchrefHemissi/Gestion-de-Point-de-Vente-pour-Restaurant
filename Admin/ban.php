@@ -1,4 +1,6 @@
 <?php
+include 'session_check.php';
+
 // Get the customer ID from the request
 require_once 'connexionAdminDB.php';
 $customerId = $_POST['id'];
@@ -20,4 +22,3 @@ $query = $con->prepare('UPDATE utilisateur SET etat = ? WHERE id = ?');
 $query->bind_param('ii', $newStatus, $customerId);
 $query->execute();
 echo $newStatus;
-?>

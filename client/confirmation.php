@@ -1,16 +1,16 @@
 <?php
-session_start();
+include 'session_check.php';
 require_once 'connexionBD.php';
 // Check if the form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
+
     // Check if the necessary POST variables are set
     if (isset($_POST['creditCardNumber']) && isset($_POST['securityCode'])) {
-        
+
         // Retrieve credit card information from POST
         $creditCardNumber = $_POST['creditCardNumber'];
         $securityCode = $_POST['securityCode'];
-        
+
         // Validate credit card information (you might want to implement more robust validation)
         if (!empty($creditCardNumber) && !empty($securityCode)) {
 
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($result) {
                     // Credit card information is correct
                     //check if the montant is enough
-                    if($result['montant'] < $_SESSION['total']) {
+                    if ($result['montant'] < $_SESSION['total']) {
                         $_SESSION['payment_message'] = "Insufficient funds.";
                         header("Location: payment.php");
                         exit();
@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     // Insert into ordproduit table
                     $ordproductSql = "INSERT INTO ordproduit (id_commande, id_produit, quantite) VALUES (?, ?, ?)";
-                    $ordproductStmt = $conn->prepare($ordproductSql); 
+                    $ordproductStmt = $conn->prepare($ordproductSql);
 
                     // update colonne vendu de la table produit
 
@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $ordproductStmt->execute([$totalligne + 1, $item['id'], $item['quantity']]);
                         $updateProduitStmt->execute([$item['quantity'], $item['id']]);
                     }
-                    
+
                     // Update montant in cartebancaire table
                     $quer = "UPDATE cartebancaire SET montant=montant-? WHERE numero=?";
                     $stmtq = $conn->prepare($quer);
@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     header("Location: payment.php");
                     exit();
                 }
-            } catch(PDOException $e) {
+            } catch (PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
                 $_SESSION['payment_message'] = $e->getMessage();
                 header("Location: payment.php");
@@ -83,20 +83,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Close database connection
             $conn = null;
-            
         } else {
             // Credit card information not provided
             $_SESSION['payment_message'] = "please provide valide info.";
             header("Location: payment.php");
             exit();
         }
-        
     } else {
         // Required POST variables not set
         echo "Error: Required POST variables not set.";
         header("Location: home.php");
     }
-    
 } else {
     // Form not submitted using POST method
     echo "Error: Form not submitted using POST method.";
@@ -106,11 +103,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
+
         body {
             font-family: "Montserrat", sans-serif;
             display: flex;
@@ -119,34 +118,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             height: 100vh;
             flex-direction: column;
         }
+
         button {
             padding: 10px 20px;
-            background-color:  #e1691e;
+            background-color: #e1691e;
             color: white;
             border: none;
             cursor: pointer;
             border-radius: 5px;
         }
-        p{
+
+        p {
             font-size: 20px;
             font-family
-
         }
     </style>
     <title>Confirmation</title>
     <link rel="stylesheet" href="css/style2.css">
 </head>
+
 <body>
-    <?php if (isset($orderSql)) { 
+    <?php if (isset($orderSql)) {
         unset($_SESSION['cart']);
         unset($_SESSION['total']);
-       // $_SESSION['cart']=array();
+        // $_SESSION['cart']=array();
         //$_SESSION['total']=0;
-        ?>
+    ?>
         <p>Order placed successfully.</p>
         <button onclick="location.href='home.php'">Return to Home</button>
     <?php } ?>
-   
+
 
 </body>
+
 </html>

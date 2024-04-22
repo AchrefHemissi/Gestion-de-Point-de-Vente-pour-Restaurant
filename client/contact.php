@@ -1,9 +1,7 @@
 <?php
-session_start();
-if (!isset($_SESSION['user_id'])) {
-   header("Location: ../login/index.php");
-   exit;
-}
+
+include 'session_check.php';
+
 require_once 'connexionBD.php';
 $conn = ConnexionBD::getInstance();
 $query = "SELECT * FROM utilisateur WHERE id = ?";

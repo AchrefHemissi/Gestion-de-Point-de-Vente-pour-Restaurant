@@ -1,12 +1,5 @@
 <?php
-session_start();
-
-
-if (!isset($_SESSION['user_id'])) {
-  header("Location: ../login/index.php");
-  exit();
-}
-
+include 'session_check.php';
 
 // Database connection parameters
 require_once 'connexionBD.php';

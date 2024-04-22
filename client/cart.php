@@ -1,10 +1,9 @@
 <?php
-session_start();
-if(!isset($_SESSION['user_id'])){
-    header("Location: ../login/index.php");
-    exit;
-}
-function addToCart($id,$name,$price ,$quantity,$imagelink) {
+
+include 'session_check.php';
+
+function addToCart($id, $name, $price, $quantity, $imagelink)
+{
     $_SESSION['cart'][$id] = array(
         'id' => $id,
         'quantity' => $quantity,
@@ -13,11 +12,13 @@ function addToCart($id,$name,$price ,$quantity,$imagelink) {
         'imagelink' => $imagelink
     );
     // Remove an item from the cart
-function removeFromCart($id) {
+    function removeFromCart($id)
+    {
         unset($_SESSION['cart'][$id]);
     }
 }   // Calculate total price of items in the cart
-function calculateTotal() {
+function calculateTotal()
+{
     $total = 0;
     foreach ($_SESSION['cart'] as $item) {
         $total += $item['price'] * $item['quantity'];
@@ -33,13 +34,13 @@ if (!isset($_SESSION['total'])) {
 }
 
 
-if(isset($_POST['id']) && isset($_POST['qty'])) {
-    $id= $_POST['id'];
-    $name=$_POST['name'];
-    $price=$_POST['price'];
-    $quantity=$_POST['qty'];
-    $imagelink=$_POST['imglink'];
-    addToCart($id,$name,$price, $quantity,$imagelink);
+if (isset($_POST['id']) && isset($_POST['qty'])) {
+    $id = $_POST['id'];
+    $name = $_POST['name'];
+    $price = $_POST['price'];
+    $quantity = $_POST['qty'];
+    $imagelink = $_POST['imglink'];
+    addToCart($id, $name, $price, $quantity, $imagelink);
 }
 // Add an item to the cart
 
@@ -63,159 +64,162 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>my cart</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>my cart</title>
 
-   <!-- font awesome cdn link  -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
-   <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/style.css">
-   <link rel="shortcut icon" type="x-icon" href="images/logo.png" />
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" type="x-icon" href="images/logo.png" />
 
 </head>
+
 <body>
-   
-<header class="header">
 
-   <section class="flex">
+    <header class="header">
 
-      <a href="home.php" class="logo"><b>GL-icious </b> 😋</a>
+        <section class="flex">
 
-      <nav class="navbar">
-         <a href="home.php">home</a>
-         <a href="about.php">about</a>
-         <a href="menu.php">menu</a>
-         <a href="orders.php">orders</a>
-         <a href="contact.php">contact</a>
-      </nav>
+            <a href="home.php" class="logo"><b>GL-icious </b> 😋</a>
 
-      <div class="icons">
-         <a href="search.php"><i class="fas fa-search"></i></a>
-         <a href="cart.php"><i class="fas fa-shopping-cart"></i><?php echo isset($_SESSION['cart']) ? '('.count($_SESSION['cart']).')' : 0; ?>
-</span></a>
-         <div id="user-btn" class="fas fa-user"></div>
-         <div id="menu-btn" class="fas fa-bars"></div>
-      </div>
+            <nav class="navbar">
+                <a href="home.php">home</a>
+                <a href="about.php">about</a>
+                <a href="menu.php">menu</a>
+                <a href="orders.php">orders</a>
+                <a href="contact.php">contact</a>
+            </nav>
 
-      <div class="profile">
-         <p class="name"><?php echo $user['prenom'].' '.$user['nom']?></p>
-         <div class="flex">
-            <a href="profile.php" class="btn">profile</a>
-            <a href="logout.php" class="delete-btn">logout</a>
-         </div>
-        
-      </div>
+            <div class="icons">
+                <a href="search.php"><i class="fas fa-search"></i></a>
+                <a href="cart.php"><i class="fas fa-shopping-cart"></i><?php echo isset($_SESSION['cart']) ? '(' . count($_SESSION['cart']) . ')' : 0; ?>
+                    </span></a>
+                <div id="user-btn" class="fas fa-user"></div>
+                <div id="menu-btn" class="fas fa-bars"></div>
+            </div>
+
+            <div class="profile">
+                <p class="name"><?php echo $user['prenom'] . ' ' . $user['nom'] ?></p>
+                <div class="flex">
+                    <a href="profile.php" class="btn">profile</a>
+                    <a href="logout.php" class="delete-btn">logout</a>
+                </div>
+
+            </div>
 
 
-   </section>
+        </section>
 
-</header>
+    </header>
 
-<div class="heading">
-   <h3>shopping cart</h3>
-   <p><a href="home.php">home </a> <span> / cart</span></p>
-</div>
-
-<section class="products">
-
-   <h1 class="title">your cart</h1>
-
-   
-
-   <div class="box-container">
-   <style>
-    .message {
-        font-size: 25px;
-        color: red;
-    }
-</style>
-
-   <?php
-
-if (isset($_SESSION['cart_message'])) {
-    echo '<p class="message">' . $_SESSION['cart_message'] . '</p>';
-    unset($_SESSION['cart_message']);
-}
-
-$cart = $_SESSION['cart'];
-$total = 0; 
-foreach ($cart as $id=>$item):
-?>
-<div class="box">
-    
-    <button class="fas fa-times delete-btn" type="button" data-product-id='<?php echo $id; ?>'></button>
-    <img src='<?php echo $item['imagelink'] ?>' alt="">
-    <div class="name"><?php echo $item['name']; ?></div>
-    <div class="flex">
-        <div class="price"><span><?php echo $item['price']?> $</span></div>
-        <input type="number" readonly name="qty" class="qty" min="1" max="99" value='<?php echo intval($item['quantity']) ?>'>
+    <div class="heading">
+        <h3>shopping cart</h3>
+        <p><a href="home.php">home </a> <span> / cart</span></p>
     </div>
-    <div class="sub-total">total : <span><?php echo (intval($item['quantity']) * ($item['price'])).'$'; ?></span></div>
-</div>
-<?php
-$total += intval($item['quantity']) * ($item['price']);
-endforeach;
-$_SESSION['total'] = $total;
-?>
 
+    <section class="products">
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const deleteBtns = document.querySelectorAll('.delete-btn');
-        deleteBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const productId = btn.getAttribute('data-product-id');
-                // Send AJAX request to delete_item.php with productId
-                const xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState === XMLHttpRequest.DONE) {
-                        if (xhr.status === 200) {
-                            // Remove the product box from the DOM if deletion is successful
-                            btn.parentElement.remove();
-                            //auto reload the page
-                            window.location.href = 'cart.php';
-                            
-                        } else {
-                            console.error('Failed to delete product.');
-                        }
-                    }
-                };
-                xhr.open('POST', 'delete_product.php', true);
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                xhr.send('id=' + encodeURIComponent(productId));
-                
-            });
-        });
-    });
-</script>
+        <h1 class="title">your cart</h1>
 
 
 
+        <div class="box-container">
+            <style>
+                .message {
+                    font-size: 25px;
+                    color: red;
+                }
+            </style>
 
-      
-</div>
-<div class="cart-total">
-      <p>grand total : <span> <?php echo $total.'$' ?> </span></p>
-      <a href="checkout.php" class="btn">checkout orders</a>
-      </div>
-   </div>
+            <?php
 
-   
+            if (isset($_SESSION['cart_message'])) {
+                echo '<p class="message">' . $_SESSION['cart_message'] . '</p>';
+                unset($_SESSION['cart_message']);
+            }
 
-</section>
+            $cart = $_SESSION['cart'];
+            $total = 0;
+            foreach ($cart as $id => $item) :
+            ?>
+                <div class="box">
+
+                    <button class="fas fa-times delete-btn" type="button" data-product-id='<?php echo $id; ?>'></button>
+                    <img src='<?php echo $item['imagelink'] ?>' alt="">
+                    <div class="name"><?php echo $item['name']; ?></div>
+                    <div class="flex">
+                        <div class="price"><span><?php echo $item['price'] ?> $</span></div>
+                        <input type="number" readonly name="qty" class="qty" min="1" max="99" value='<?php echo intval($item['quantity']) ?>'>
+                    </div>
+                    <div class="sub-total">total : <span><?php echo (intval($item['quantity']) * ($item['price'])) . '$'; ?></span></div>
+                </div>
+            <?php
+                $total += intval($item['quantity']) * ($item['price']);
+            endforeach;
+            $_SESSION['total'] = $total;
+            ?>
+
+
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    const deleteBtns = document.querySelectorAll('.delete-btn');
+                    deleteBtns.forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            const productId = btn.getAttribute('data-product-id');
+                            // Send AJAX request to delete_item.php with productId
+                            const xhr = new XMLHttpRequest();
+                            xhr.onreadystatechange = function() {
+                                if (xhr.readyState === XMLHttpRequest.DONE) {
+                                    if (xhr.status === 200) {
+                                        // Remove the product box from the DOM if deletion is successful
+                                        btn.parentElement.remove();
+                                        //auto reload the page
+                                        window.location.href = 'cart.php';
+
+                                    } else {
+                                        console.error('Failed to delete product.');
+                                    }
+                                }
+                            };
+                            xhr.open('POST', 'delete_product.php', true);
+                            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                            xhr.send('id=' + encodeURIComponent(productId));
+
+                        });
+                    });
+                });
+            </script>
 
 
 
 
-<div class="loader">
-   <img src="images/loader.gif" alt="">
-</div>
 
-<script src="js/script.js"></script>
+        </div>
+        <div class="cart-total">
+            <p>grand total : <span> <?php echo $total . '$' ?> </span></p>
+            <a href="checkout.php" class="btn">checkout orders</a>
+        </div>
+        </div>
+
+
+
+    </section>
+
+
+
+
+    <div class="loader">
+        <img src="images/loader.gif" alt="">
+    </div>
+
+    <script src="js/script.js"></script>
 
 </body>
+
 </html>

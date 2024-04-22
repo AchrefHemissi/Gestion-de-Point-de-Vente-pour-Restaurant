@@ -1,4 +1,6 @@
     <?php
+    include 'session_check.php';
+
     require_once 'connexionAdminDB.php';
     $con = Database::getInstance();
     if (!$con) {

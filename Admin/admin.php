@@ -1,10 +1,5 @@
 <?php
-session_start();
-
-if (!isset($_SESSION['user_id'])) {
-  header("Location: ../login/index.php");
-  exit;
-}
+include 'session_check.php';
 require_once 'connexionAdminDB.php';
 ?>
 
@@ -267,9 +262,9 @@ require_once 'connexionAdminDB.php';
           formData.append('id', orderId);
 
           fetch('update_order.php', {
-              method: 'POST',
-              body: formData
-            });
+            method: 'POST',
+            body: formData
+          });
 
           orderDiv.style.display = 'none';
         });

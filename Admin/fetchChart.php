@@ -1,4 +1,6 @@
 <?php
+include 'session_check.php';
+
 require_once 'connexionAdminDB.php';
 $con = Database::getInstance();
 if (!$con) {
@@ -16,4 +18,3 @@ while ($row = mysqli_fetch_assoc($res)) {
 mysqli_close($con);
 
 echo json_encode($data);
-?>
